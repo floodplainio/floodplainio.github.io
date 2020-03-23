@@ -1,7 +1,6 @@
 ---
 layout: post
-title: First post!
+title: Introducing Floodplain
 image: /img/hello_world.jpeg
 ---
 
-This is my first post, how exciting!
