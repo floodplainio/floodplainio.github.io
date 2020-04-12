@@ -21,8 +21,62 @@ This Kotlin DSL is just a certain 'shape' we put our code in, for the rest it is
 We will 'compile' that code to a Kafka Streams definition (a 'topology' as we call it in the Kafka lingo), and a set of 'connect configs' that we can send to a Kafka Connect instance, so it will know how to configure the data sources and sinks.
 
 So in pseudo code it looks something like this
+(define source) -> (define transformation) -> (define sink)
 
-## Why? What problem does it solve?
+To make it a bit more specific:
+(configure sources and sinks)
+(define source) -> (define transformation) -> (define sink)
+... repeat as necessary
+
+In real code it does get a bit more involved. Let's take a concrete example where we want to stream the contents of one single table in Postgres into a collection in MongoDB, without any fancy transformations in between.
+
+It looks something like this:
+
+```kotlin
+fun main() {
+    pipe("mygeneration") {
+        val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
+        val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
+        postgresSource("public","actor",pgConfig) {
+            mongoSink(topologyContext,"mycollection","sometopic",mongoConfig)
+        }
+    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092", UUID.randomUUID().toString())
+}
+```
+
+Lets' go through this small program. First we create a configuration two configuration objects for Postgres and MongoDB. The functions that create these are specific for that endpoint, so it will be obvious which and what kind of parameters are needed for configuration. The function signature is:
+
+```kotlin
+fun Pipe.postgresSourceConfig(name: String, hostname: String,port: Int, username: String, password: String, database: String): PostgresConfig {}
+```
+
+This is an advantage of configuring a system using a strongly typed language. It is harder to get wrong, and an IDE can help you much better than when you are crafting a specific YAML to make ti work. Also, as we are in a regular Kotlin main function, we can supply these configuration properties in any way that works for us. In this case, we hard coded them in the code, that will usually not be optimal, but we can easily read them from environment variables, configuration files or some other configuration data source.
+
+But the next part is where it gets interesting:
+
+```kotlin
+postgresSource("public","actor",pgConfig) {
+	mongoSink("mycollection","sometopic",mongoConfig)
+}
+```
+
+In this part we request the 'actor' table (in the 'public' schema) in our postgres config to be streamed though our system. After that we stream it directly to a mongodb sink, to a collection "mycollection" (using a topic called "sometopic" but that does not matter too much here)
+
+Note for those unfamiliar with the Kotlin lambda syntax, the postgresSource is a method call with 4(!) parameters, two strings, a configuration object and a lambda. So the part between the curly brackets is actually the last parameter.
+
+That lambda is a so called lambda with a receiver, so aside from supplying a function, we also supply a receiver, basically what 'this' means in the context of that function.
+
+This is the method signature of the 'postgresSource' function:
+
+```kotlin
+fun Pipe.postgresSource(schema: String, table: String, config: PostgresConfig, init: Source.() -> Unit): Source {}
+```
+
+https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver
+
+After that
+
+## Example
 
 Let's take an example.
 
