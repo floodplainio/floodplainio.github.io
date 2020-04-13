@@ -213,6 +213,65 @@ Every transformer can emit one 'main' message, and another secondary message. Th
 
 Secondary messages don't survive, they only make it to the next transformer, so if you want to save anything, you will need to merge the messages. In this case, in the 'set' operator, we add the entire secondary message as a submessage into the main message.
 
+This is pretty easy to express but sadly, this particular situation is actually pretty uncommon in SQL databases (meaning two tables that share the same key space). Usually it gets a bit more complex, for example when there is a one-to-many relationship between tables.
+
+Let's take a look at the (simplified) data model of our example app. Two tables, film and language. Every film has a field 'language_id', which points to a record in the language. In PostgresDDL, the Film table:
+
+```sql
+CREATE TABLE
+    film
+    (
+        film_id SERIAL NOT NULL,
+        title CHARACTER VARYING(255) NOT NULL,
+        language_id SMALLINT NOT NULL,
+        CONSTRAINT film_language_id_fkey FOREIGN KEY (language_id) REFERENCES "language"
+        ("language_id") ON
+    );
+```
+
+and the language table:
+
+```sql
+CREATE TABLE
+    language
+    (
+
+        language_id SERIAL NOT NULL,
+        name CHARACTER(20) NOT NULL,
+        PRIMARY KEY (language_id)
+    );
+```
+
+So if I want to include the name of the language in a downstream film, I need to join these two. Clearly in this case the two tables have different keys (film_id vs. language_id). Even if they would have the same name and type, they are different keys: Film # 1 is something completely different to Language # 1.
+To make this work we will need to access the language_id field of film, and use that to join with the language table. For that, we have the joinRemote transformation. In a join remote transformation we have an additional parameter, a lambda that extracts the remote key from the message.
+
+Let's have a look at another example:
+
+```kotlin
+postgresSource("public","film",pgConfig) {
+	joinRemote({msg->msg["language_id"].toString()}) {
+		postgresSource("public","language",pgConfig) {} }
+	set {
+		film,language->film["language"]=language["name"]; film
+	}
+	mongoSink("filmwithlanguage","filmwithlanguage",mongoConfig)
+}
+```
+
+The key extraction lambda:
+
+```kotlin
+{msg->msg["language_id"].toString()}
+```
+
+Will extract the language_id field from the message, and convert it to a string (in floodplain _all keys_ are strings.)
+After that, the set statement will add the 'name' field from the language record to the film record, and send it on its way to mongodb.
+There are some interesting observations to make here: This is a many-to-one relationship: Many films exist that share the same language, while (in this data model at least) films have only one language.
+So once this floodplain transformation is running, every time a film changes, this join is performed again, and the new record is inserted into mongodb.
+However, if a language name changes (I know, does not seem too common, but for arguments sake), that would imply that every film in that language should be re-joined with that new name, and sent to mongodb again.
+So if my database has 1000 movies in Spanish, and I would like to change the name of the Spanish language to 'Castillian', that will result in 1000 new inserts into Mongodb.
+It is important to be aware of these 'write magnification' effects, because as topologies get bigger, tiny source changes can have a 'butterfly effect' in the number of downstream changes.
+
 ## Example
 
 Let's take an example.
