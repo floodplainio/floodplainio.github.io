@@ -4,7 +4,8 @@ title: About me
 subtitle:
 ---
 
-Frank Lyaruu
+## Frank Lyaruu
+
 Software engineer, CTO & Architect-with-dirty-hands.
 Dance instructor and Blues DJ
 

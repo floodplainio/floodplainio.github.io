@@ -87,11 +87,11 @@ Now, back to our example. In this case, the only thing we supply is a sink trans
 Let's make our example a little bit more interesting.
 
 ```kotlin
-        postgresSource("public","actor",pgConfig) {
-            set { msg,_ -> msg["last_update"]=null; msg}
-			filter {msg,_ ->(msg["actor_id"] as Int) < 10}
-            mongoSink("mycollection","sometopic",mongoConfig)
-        }
+postgresSource("public","actor",pgConfig) {
+	set { msg,_ -> msg["last_update"]=null; msg}
+	filter {msg,_ ->(msg["actor_id"] as Int) < 10}
+	mongoSink("mycollection","sometopic",mongoConfig)
+}
 ```
 
 We've added two transformers to our source. First, 'set' is a single message transformation. So every message gets passed through this function, and will return a single message as well (Not completely true: In a later chapter we'll address the second parameter, usually called state). In this case, we'll remove a column, the 'last_update' column. This is a field that was in the original Postgres database, and if we know we're not interested in this field downstream, it makes sense to remove it as soon as possible.
@@ -264,7 +264,7 @@ The key extraction lambda:
 {msg->msg["language_id"].toString()}
 ```
 
-Will extract the language*id field from the message, and convert it to a string (in floodplain \_all keys* are strings.)
+Will extract the language_id field from the message, and convert it to a string (in floodplain **all keys** are strings.)
 After that, the set statement will add the 'name' field from the language record to the film record, and send it on its way to mongodb.
 There are some interesting observations to make here: This is a many-to-one relationship: Many films exist that share the same language, while (in this data model at least) films have only one language.
 So once this floodplain transformation is running, every time a film changes, this join is performed again, and the new record is inserted into mongodb.
