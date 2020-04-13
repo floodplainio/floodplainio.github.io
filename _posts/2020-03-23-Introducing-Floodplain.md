@@ -176,7 +176,7 @@ Topology:
 
 Not the most helpful format, it gets better with some visualization (kudos to zz85 to create [this open source visualization](https://zz85.github.io/kafka-streams-viz/), it's a tremendous help when figuring out topology issues )
 
-![alt text](img/topology.png "Topology image")
+![alt text](/img/topology.png "Topology image")
 
 ## Stateful transformations
 
@@ -187,7 +187,31 @@ That does not cover all cases. Sometimes we need transformations that 'remember'
 A very common example of one of these operations is a join: Imagine we have two tables, we create two sources to receive those tables, and we'd like to join the records of these tables to one, combined record. For simplicity's sake, lets assume these tables share the same key space.
 
 Now one thing we can't do (at least at this point) is _querying_ data. We receive versions of records. An insert is a record with a new, unseen key. An update is a new version of a record with a known key. A delete is a known key, but with no record at all. We have no control of when we get those updates.
-So if we want to join two topics, we need to store the records of both topics. When a record appears on topic A, we check our local store of topic B, to see if there is a matching record with the same key. If we find one, we combine the two (somehow). If there is no matching record in Topic B, we simply save the message in the local storage of Topic A. When, at some point, a record appears in topic B with the matching key, we will retrieve the record from topic A
+So if we want to join two topics, we need to store the records of both topics. When a record appears on topic A, we check our local store of topic B, to see if there is a matching record with the same key. If we find one, we combine the two (somehow). If there is no matching record in Topic B, we simply save the message in the local storage of Topic A. When, at some point, a record appears in topic B with the matching key, we will retrieve the record from topic A.
+
+This is pretty straightforward. In floodplain Kotlin DSL this would look like this:
+
+```kotlin
+    pipe("generation") {
+        val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
+        val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
+        postgresSource("public","tableA",pgConfig) {
+            joinWith {
+                postgresSource("public","tableB",pgConfig) {}
+            }
+            set {
+                msg,msg2->msg["topicBSubMessage"]=msg2; msg
+            }
+            mongoSink("mycollection","sometopic",mongoConfig)
+        }
+    }
+```
+
+We add a joinWith transformer to our source (the topicA source), which will contain another source, topicB
+After this transformation, whenever a join matches we _still have two messages_, one from topicA, and one from topicB, both with the same key.
+Every transformer can emit one 'main' message, and another secondary message. The semantics of the second message depends on the transformation. In the case of a join, it is the message the main source was joined with.
+
+Secondary messages don't survive, they only make it to the next transformer, so if you want to save anything, you will need to merge the messages. In this case, in the 'set' operator, we add the entire secondary message as a submessage into the main message.
 
 ## Example
 
