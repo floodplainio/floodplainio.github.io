@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: Introducing Floodplain
 subtitle: What is Floodplain?
 image: /img/river.jpg
@@ -264,7 +264,7 @@ The key extraction lambda:
 {msg->msg["language_id"].toString()}
 ```
 
-Will extract the language_id field from the message, and convert it to a string (in floodplain _all keys_ are strings.)
+Will extract the language*id field from the message, and convert it to a string (in floodplain \_all keys* are strings.)
 After that, the set statement will add the 'name' field from the language record to the film record, and send it on its way to mongodb.
 There are some interesting observations to make here: This is a many-to-one relationship: Many films exist that share the same language, while (in this data model at least) films have only one language.
 So once this floodplain transformation is running, every time a film changes, this join is performed again, and the new record is inserted into mongodb.
