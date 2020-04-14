@@ -21,7 +21,7 @@ description: Floodplain
 # List of links in the navigation bar
 navbar-links:
   About Me: "https://www.linkedin.com/in/lyaruu/"
-  Intro: "Floodplain.md"
+  Intro: "Floodplain"
   Home: "http://floodplain.io"
 
 #    - Beautiful Jekyll: "http://deanattali.com/beautiful-jekyll/"
