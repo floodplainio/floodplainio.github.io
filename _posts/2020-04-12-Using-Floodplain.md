@@ -92,6 +92,34 @@ The second transformation is a filter. A filter wants a lambda that takes a mess
 After that we still have the same mongodb sink, that will collect the data into the mongodb collection.
 
 ## Deep dive
+So how does Floodplain work?
+```kotlin
+fun main() {
+    pipe("mygeneration") {
+        val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
+        val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
+        postgresSource("public","actor",pgConfig) {
+            mongoSink(topologyContext,"mycollection","sometopic",mongoConfig)
+        }
+    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092", UUID.randomUUID().toString())
+}
+```
+When we run this code, the pipe() function call creates a pipe object, this is the toplevel floodplain construct. The pipe contains one or more (toplevel) source objects. Every source object contains zero or more transformations, terminated by a sink.
+Some transformations, like joins, can contain other sources.
+
+The pipe() call takes a generation string (more on that later) and returns a Pipe() object.
+On the Pipe object we can call the render() method, which returns three values (using a Triple): A list of source configurations, a list of sink configurations and a Kafka Streams Topology.
+The source and sink configurations are JSON strings, which we can POST to a Kafka Connect instance, and finally we can use a KafkaStreams instance to run the Topology instance.
+
+We can shorthand this by calling this method on pipe:
+```kotlin
+fun renderAndStart(connectorURL:URL, kafkaHosts: String, clientId: String) {}
+```
+... where we have to supply the URL to post the JSON config objects, a connection string for the Kafka cluster, and finally a clientId for the streams run.
+
+TODO generations
+TODO threading
+
 
 Depending on your learning style, you might want to look into examples first, otherwise we'll explain what happens under the hood.
 The postgres source:
@@ -148,7 +176,7 @@ Topology:
  Topologies:
    Sub-topology: 0
     Source: mytenant-mydeployment-mypostgres.public.actor (topics: [mytenant-mydeployment-mypostgres.public.actor])
-      --> mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
+      --> mytenant-mydeployment-myFtion-myinstance-debezium_debconv_1_0
     Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0 (stores: [])
       --> mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
       <-- mytenant-mydeployment-mypostgres.public.actor
