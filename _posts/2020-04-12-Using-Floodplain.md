@@ -265,7 +265,18 @@ It is important to be aware of these 'write magnification' effects, because as t
 
 So after this, in the resulting MongoDB collection, all records will have a 'language' field, that will show the string representation of the language. If the source database language changes, all MongoDB records will be updated.
 
-In a situation like this it might also make sense to remove the language_id field, as it is pretty meaningless in that space.
+In a situation like this it might also make sense to remove the language_id field, as it is pretty meaningless in that space. It is bad form to expose keys to a table that does not exist, so a simple:
+
+```kotlin
+set { msg,_->msg["language_id"]=null; msg}
+```
+... would strip that field.
+
+The process we are doing now we call 'denormalization': Transforming a very structured data model that contains no duplication into a less structured, but simpler model.
+
+Typically, denormalization results in read access getting cheaper, but write access getting more expensive. We try to create a data model that is optimal for a certain read situation. Another way of looking at this is that we are performing the join whenever a record changes, instead of when someone queries it.
+
+
 
 ## Aggregations
 
@@ -276,6 +287,19 @@ TODO
 TODO
 
 ## Buffering
+Floodplain is an eventual consistency model: Changes in the source database propagate to the destination source in near-realtime, but there **is** a measurable delay. So you **can** update the source database, and immediately check the destination database and still see the old value.
+
+Usually we want to minimize this delay to minimize this possible window of inconsistency, but sometimes we don't mind, and we even want to create a conscious delay in updating the destination.
+
+Imagine this situation: We update a certain record many times in quick succession, simply because that is our workflow, or how our existing code works. Now conceptually we only need to propagate the last version of that record, as we would overwrite that version immediately with the next version.
+
+Combined with the 'write amplification' factors we talked about before it can really make a difference in performance. 
+
+TODO: Code example
+```kotlin
+buffer(20000)
+```
+
 
 ## Source connectors
 
