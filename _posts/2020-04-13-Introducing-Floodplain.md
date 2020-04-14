@@ -3,7 +3,6 @@ layout: page
 title: Introducing Floodplain
 subtitle: What is Floodplain?
 image: /img/river.jpg
-pin: true
 ---
 
 # Floodplain
