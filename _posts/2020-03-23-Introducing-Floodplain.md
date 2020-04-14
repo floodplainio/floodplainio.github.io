@@ -3,6 +3,7 @@ layout: page
 title: Introducing Floodplain
 subtitle: What is Floodplain?
 image: /img/river.jpg
+pin: true
 ---
 
 # Floodplain
@@ -27,3 +28,5 @@ The streaming SQL version of KSQL is another extension of an already pretty weak
 and we think that embracing a new language seems more effective than forcing a query language further and further into a non-query domain. Also static analysis of SQL is tricky, as is IDE integration.
 
 KSQL is working on improving this, integrating existing code into Floodplain streams is much easier. All stateful and stateless transformations are just Kotlin and Java code, so it is much more straightforward to integrate.
+
+[Using Floodplain](Using-Floodplain)
