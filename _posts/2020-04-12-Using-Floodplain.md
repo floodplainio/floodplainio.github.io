@@ -117,11 +117,24 @@ fun renderAndStart(connectorURL:URL, kafkaHosts: String, clientId: String) {}
 ```
 ... where we have to supply the URL to post the JSON config objects, a connection string for the Kafka cluster, and finally a clientId for the streams run.
 
-TODO generations
-TODO threading
+
+## Generations
+Previously we mentioned the 'generation' string when rendering a pipe. We use that string to differentiate different runs of a topology. We need something like this due to the stateful nature of Floodplain runs. Remember, when we start a run, it will start reading the sources, perform the transformations and send the results to the sinks. Now if we stop this instance, and start it again, it will continue where it left off.
+Now if we want to change something in the code, we can do so, and restart again, but then we end up in a weird state: Everything up to now, all stateful tranformations and sinks contain data created by the 'old' code, but every new change will be processed by the new code. This might create a result that neither the old code nor the new code could create, so changing a 'running' topology (and by running I include stopped and later continued instances) should be done with great care.
+
+Usually it is wiser to create a new generation: Use different topics, different consumerIds, so it starts from scratch. An additional benefit of having an entire new set of consumers and topics, is that we can leave the old topology running, and running the new one in parallel. When both run in parallel, we can assess both topologies, and if we are happy with the new version, and we're sure the old version is no longer used, we can stop and delete the old instance.
+
+This is especially important when we are running large data sets: If we are running floodplain on a table of 100M records, getting a new generation up and running can take hours, and we want to upgrade without downtime.
+
+## Threading
+TODO
 
 
-Depending on your learning style, you might want to look into examples first, otherwise we'll explain what happens under the hood.
+## Supported sources and sinks
+For sources, we support debezium now, and for configuration we've only implemented Postgres. Other debezium sources (MySQL, SQLServer, MongoDB, Cassandra (experimental) and Oracle (experimental) should be pretty trivial to implement, as the configuration and data should be compatible. The biggest hurdle for writing an implementation is needing a good test data set, contributions are welcome.
+
+For sinks we support MongoDB, HTTP, and Google Sheets (experimental). In theory, adding sources or sinks should be trivial, but in practice there are always some surpises that need adressing.
+
 The postgres source:
 
 ```json
