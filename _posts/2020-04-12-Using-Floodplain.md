@@ -276,7 +276,20 @@ The process we are doing now we call 'denormalization': Transforming a very stru
 
 Typically, denormalization results in read access getting cheaper, but write access getting more expensive. We try to create a data model that is optimal for a certain read situation. Another way of looking at this is that we are performing the join whenever a record changes, instead of when someone queries it.
 
+## Many-to-many relationships.
 
+Staying with our film datamodel, let explore the relationship between film and actor. A film typically features more than one actor, and an actor can obviously play in more than one film.
+In SQL databases we use a linking table for that: A special table that contains records with both a film_id and an actor_id, and within this table, neither film_id or actor_id are complete keys.
+
+Suppose we want to create a film info page, that can be served by quering a single document from our destination data base, including a list of actors. Because we only query one single document, it scales very easily and cheaply. As we mentioned when we addressed 'write amplification', changes to actors are relatively expensive: If we change an attribute of an actor, every single film document needs to be reassembled and rewritten to the destination database. In this particular case that does not seem to much of an issue as the data seems pretty infrequent in changing, but, again, it is important to keep this in mind.
+
+So how could we denormalize these tables in Floodplain?
+Before we get into code, let's assess the things we need to do.
+We're joining three tables: film, actor, and our linking table film_actor.
+First, we need to join the film_actor with the actor table (using the actor_id).
+Then we end up with a table with the same structure as the film_actor, only we've copied all fields from actor to this table.
+Next, we are going to group this table to film_id, so we can join it later with the film table. So we end up with a 'table' that contains a list of actors, with film_id as a key.
+Now we've grouped this table to film_id, we share the same key as film, so we can join them together easily.
 
 ## Aggregations
 
