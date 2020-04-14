@@ -4,6 +4,7 @@ title: Using Floodplain
 subtitle: How to use Floodplain?
 image: /img/river.jpg
 ---
+
 ## How does it work?
 
 Floodplain is a Kotlin library. Most of it is written in Java, but the fact that Kotlin has extension functions and much better DSL capabilities, we chose for Kotlin.
@@ -267,14 +268,20 @@ So after this, in the resulting MongoDB collection, all records will have a 'lan
 In a situation like this it might also make sense to remove the language_id field, as it is pretty meaningless in that space.
 
 ## Aggregations
+
 TODO
 
 ## Splitting topics
+
 TODO
 
-## Bufferering
+## Buffering
 
+## Source connectors
 
+## Sink Connectors
+
+## Extending floodplain: Creating your own connectors and transformers
 
 ## Example
 
