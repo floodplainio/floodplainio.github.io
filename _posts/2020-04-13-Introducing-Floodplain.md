@@ -24,7 +24,7 @@ Perhaps personal taste, but I don't like SQL much. It has served the world well,
 
 The streaming SQL version of KSQL is another extension of an already pretty weak standard, while different versions of SQL seem similar, switching between implementations is far from painless, and the superficial similarities actually make it harder.
 
-and we think that embracing a new language seems more effective than forcing a query language further and further into a non-query domain. Also static analysis of SQL is tricky, as is IDE integration.
+and we think that embracing a new language seems more effective than forcing a query language further and further into a non-query domain. Also static analysis of SQL is tricky, as is IDE integration. A modern and statically typed language language can help the developer so much better.
 
 KSQL is working on improving this, integrating existing code into Floodplain streams is much easier. All stateful and stateless transformations are just Kotlin and Java code, so it is much more straightforward to integrate.
 
