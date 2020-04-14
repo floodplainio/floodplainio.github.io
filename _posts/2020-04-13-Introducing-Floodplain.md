@@ -28,4 +28,4 @@ and we think that embracing a new language seems more effective than forcing a q
 
 KSQL is working on improving this, integrating existing code into Floodplain streams is much easier. All stateful and stateless transformations are just Kotlin and Java code, so it is much more straightforward to integrate.
 
-[Using Floodplain](Using-Floodplain)
+[Using Floodplain](/2020-04-12-Using-Floodplain/)
