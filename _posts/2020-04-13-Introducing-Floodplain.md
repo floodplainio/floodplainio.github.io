@@ -22,10 +22,12 @@ So while not nearly as mature as KSQL, there are reasons to favor Floodplain's a
 
 Perhaps personal taste, but I don't like SQL much. It has served the world well, and there are many very skilled people who can do amazing things with it, that does not necessarily translate to being the best choice for essentially a new field.
 
-The streaming SQL version of KSQL is another extension of an already pretty weak standard, while different versions of SQL seem similar, switching between implementations is far from painless, and the superficial similarities actually make it harder.
+The streaming SQL version of KSQL is another extension of an already pretty weak standard, while different versions of SQL seem similar, switching between implementations is far from painless, and the superficial similarities actually make it more confusing.
 
-and we think that embracing a new language seems more effective than forcing a query language further and further into a non-query domain. Also static analysis of SQL is tricky, as is IDE integration. A modern and statically typed language language can help the developer so much better.
+And we think that embracing a new language seems more effective than forcing a query language further and further into a non-query domain. Also static analysis of SQL is tricky, as is IDE integration. A modern and statically typed language language can help the developer so much better.
 
 KSQL is working on improving this, integrating existing code into Floodplain streams is much easier. All stateful and stateless transformations are just Kotlin and Java code, so it is much more straightforward to integrate.
+
+
 
 [Using Floodplain](/2020-04-12-Using-Floodplain/)
