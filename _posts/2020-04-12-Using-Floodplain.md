@@ -91,125 +91,6 @@ The second transformation is a filter. A filter wants a lambda that takes a mess
 
 After that we still have the same mongodb sink, that will collect the data into the mongodb collection.
 
-## Deep dive
-So how does Floodplain work?
-```kotlin
-fun main() {
-    pipe("mygeneration") {
-        val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
-        val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
-        postgresSource("public","actor",pgConfig) {
-            mongoSink(topologyContext,"mycollection","sometopic",mongoConfig)
-        }
-    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092", UUID.randomUUID().toString())
-}
-```
-When we run this code, the pipe() function call creates a pipe object, this is the toplevel floodplain construct. The pipe contains one or more (toplevel) source objects. Every source object contains zero or more transformations, terminated by a sink.
-Some transformations, like joins, can contain other sources.
-
-The pipe() call takes a generation string (more on that later) and returns a Pipe() object.
-On the Pipe object we can call the render() method, which returns three values (using a Triple): A list of source configurations, a list of sink configurations and a Kafka Streams Topology.
-The source and sink configurations are JSON strings, which we can POST to a Kafka Connect instance, and finally we can use a KafkaStreams instance to run the Topology instance.
-
-We can shorthand this by calling this method on pipe:
-```kotlin
-fun renderAndStart(connectorURL:URL, kafkaHosts: String, clientId: String) {}
-```
-... where we have to supply the URL to post the JSON config objects, a connection string for the Kafka cluster, and finally a clientId for the streams run.
-
-
-## Generations
-Previously we mentioned the 'generation' string when rendering a pipe. We use that string to differentiate different runs of a topology. We need something like this due to the stateful nature of Floodplain runs. Remember, when we start a run, it will start reading the sources, perform the transformations and send the results to the sinks. Now if we stop this instance, and start it again, it will continue where it left off.
-Now if we want to change something in the code, we can do so, and restart again, but then we end up in a weird state: Everything up to now, all stateful tranformations and sinks contain data created by the 'old' code, but every new change will be processed by the new code. This might create a result that neither the old code nor the new code could create, so changing a 'running' topology (and by running I include stopped and later continued instances) should be done with great care.
-
-Usually it is wiser to create a new generation: Use different topics, different consumerIds, so it starts from scratch. An additional benefit of having an entire new set of consumers and topics, is that we can leave the old topology running, and running the new one in parallel. When both run in parallel, we can assess both topologies, and if we are happy with the new version, and we're sure the old version is no longer used, we can stop and delete the old instance.
-
-This is especially important when we are running large data sets: If we are running floodplain on a table of 100M records, getting a new generation up and running can take hours, and we want to upgrade without downtime.
-
-## Threading
-TODO
-
-
-## Supported sources and sinks
-For sources, we support debezium now, and for configuration we've only implemented Postgres. Other debezium sources (MySQL, SQLServer, MongoDB, Cassandra (experimental) and Oracle (experimental) should be pretty trivial to implement, as the configuration and data should be compatible. The biggest hurdle for writing an implementation is needing a good test data set, contributions are welcome.
-
-For sinks we support MongoDB, HTTP, and Google Sheets (experimental). In theory, adding sources or sinks should be trivial, but in practice there are always some surpises that need adressing.
-
-The postgres source:
-
-```json
-{
-  "name": "mytenant-mydeployment-mypostgres",
-  "config": {
-    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-    "database.hostname": "postgres",
-    "database.port": "5432",
-    "database.dbname": "dvdrental",
-    "database.user": "postgres",
-    "database.password": "mysecretpassword",
-    "name": "mytenant-mydeployment-mypostgres",
-    "database.server.name": "mytenant-mydeployment-mypostgres"
-  },
-  "tasks": [],
-  "type": "source"
-}
-```
-
-The mongodb sink:
-
-```json
-{
-  "name": "mytenant-mydeployment-mymongo",
-  "config": {
-    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
-    "value.converter.schemas.enable": "false",
-    "key.converter.schemas.enable": "false",
-    "value.converter": "com.dexels.kafka.converter.ReplicationMessageConverter",
-    "key.converter": "com.dexels.kafka.converter.ReplicationMessageConverter",
-    "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.FullKeyStrategy",
-    "connection.uri": "mongodb://mongo",
-    "database": "mytenant-mydeployment-mygeneration-myinstance-mydatabase",
-    "collection": "mycollection",
-    "topics": "mytenant-mydeployment-sometopic",
-    "topic.override.mytenant-mydeployment-sometopic.collection": "mycollection",
-    "name": "mytenant-mydeployment-mymongo",
-    "database.server.name": "mytenant-mydeployment-mymongo"
-  },
-  "tasks": [],
-  "type": "sink"
-}
-```
-
-It will tell the postgres source and mongodb sink all it needs to know to get the data from the source into kafka and from kafka to the sink.
-
-Finally, we have the transformation. We create a so called 'topology', which is a standard Kafka Streams construct (using the Processor API) which we can then run. A topology is a sequence (actually a directed graph) of sources, processors and sinks. If we ask Kafka Streams to describe it, it looks like this:
-
-```
-Topology:
- Topologies:
-   Sub-topology: 0
-    Source: mytenant-mydeployment-mypostgres.public.actor (topics: [mytenant-mydeployment-mypostgres.public.actor])
-      --> mytenant-mydeployment-myFtion-myinstance-debezium_debconv_1_0
-    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0 (stores: [])
-      --> mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
-      <-- mytenant-mydeployment-mypostgres.public.actor
-    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0 (stores: [])
-      --> mytenant-mydeployment-mygeneration-myinstance-set_1_1
-      <-- mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
-    Processor: mytenant-mydeployment-mygeneration-myinstance-set_1_1 (stores: [])
-      --> mytenant-mydeployment-mygeneration-myinstance-filter_1_2
-      <-- mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
-    Processor: mytenant-mydeployment-mygeneration-myinstance-filter_1_2 (stores: [])
-      --> SINK_mytenant-mydeployment-sometopic
-      <-- mytenant-mydeployment-mygeneration-myinstance-set_1_1
-    Sink: SINK_mytenant-mydeployment-sometopic (topic: mytenant-mydeployment-sometopic)
-      <-- mytenant-mydeployment-mygeneration-myinstance-filter_1_2
-```
-
-Not the most helpful format, it gets better with some visualization (kudos to zz85 to create [this open source visualization](https://zz85.github.io/kafka-streams-viz/), it's a tremendous help when figuring out topology issues )
-
-![alt text](/img/topology.png "Topology image")
-
 ## Stateful transformations
 
 In the original example we did a few transformations, but only transformations that involve only one message. The filter transformation decides to let a message pass or not, and the 'set' operation changes every message in the same way.
@@ -228,7 +109,7 @@ This is pretty straightforward. In floodplain Kotlin DSL this would look like th
         val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
         val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
         postgresSource("public","tableA",pgConfig) {
-            joinWith {
+            join {
                 postgresSource("public","tableB",pgConfig) {}
             }
             set {
@@ -239,7 +120,7 @@ This is pretty straightforward. In floodplain Kotlin DSL this would look like th
     }
 ```
 
-We add a joinWith transformer to our source (the topicA source), which will contain another source, topicB
+We add a join transformer to our source (the topicA source), which will contain another source, topicB
 After this transformation, whenever a join matches we _still have two messages_, one from topicA, and one from topicB, both with the same key.
 Every transformer can emit one 'main' message, and another secondary message. The semantics of the second message depends on the transformation. In the case of a join, it is the message the main source was joined with.
 
@@ -247,7 +128,7 @@ Secondary messages don't survive, they only make it to the next transformer, so 
 
 This is pretty easy to express but sadly, this particular situation is actually pretty uncommon in SQL databases (meaning two tables that share the same key space). Usually it gets a bit more complex, for example when there is a one-to-many relationship between tables.
 
-Let's take a look at the (simplified) data model of our example app. Two tables, film and language. Every film has a field 'language_id', which points to a record in the language. In PostgresDDL, the Film table:
+Let's take a look at the (simplified) data model of our example app. Two tables, film and language. Every film has a field 'language_id', which points to a record in the language table. In PostgresDDL, the Film table:
 
 ```sql
 CREATE TABLE
@@ -311,6 +192,7 @@ In a situation like this it might also make sense to remove the language_id fiel
 ```kotlin
 set { msg,_->msg["language_id"]=null; msg}
 ```
+
 ... would strip that field.
 
 The process we are doing now we call 'denormalization': Transforming a very structured data model that contains no duplication into a less structured, but simpler model.
@@ -341,25 +223,43 @@ TODO
 TODO
 
 ## Buffering
+
 Floodplain is an eventual consistency model: Changes in the source database propagate to the destination source in near-realtime, but there **is** a measurable delay. So you **can** update the source database, and immediately check the destination database and still see the old value.
 
 Usually we want to minimize this delay to minimize this possible window of inconsistency, but sometimes we don't mind, and we even want to create a conscious delay in updating the destination.
 
 Imagine this situation: We update a certain record many times in quick succession, simply because that is our workflow, or how our existing code works. Now conceptually we only need to propagate the last version of that record, as we would overwrite that version immediately with the next version.
 
-Combined with the 'write amplification' factors we talked about before it can really make a difference in performance. 
+Combined with the 'write amplification' factors we talked about before it can really make a difference in performance.
 
 TODO: Code example
+
 ```kotlin
 buffer(20000)
 ```
 
+## Composing topologies
+
+There is a constraint in Kafka Streams topologies we have not mentioned yet. That restriction is: We can use a source only _once_ in a topology.
+Why would you want to do that? Let me show an example.
+In our movie rental database, we have customers. Every customer has an address_id, which points to a record in the 'address' table. If we want to create a record of a customer with their address, a simple join statement works fine.
+However, there is also a table 'store' (like in brick and mortar shops). Stores also have an address_id. There is also a table 'staff', you guessed it, staff also links to the address table.
+If we were to implement this naively, kafka streams would complain (paraphrasing) that you have already added the address table, and can't use it again.
+One solution would be to simply run three topologies (not implemented at the time of writing TODO).
+This is possible but it has an
 
 ## Source connectors
 
+Kafka Connect sources and sinks should work basically work out of the box, the only thing floodplain needs is a strongly-typed configuration object.
+TODO
+
 ## Sink Connectors
 
+TODO
+
 ## Extending floodplain: Creating your own connectors and transformers
+
+TODO
 
 ## Example
 
@@ -382,3 +282,5 @@ As stated in the readme, you can connect to this database using this connection 
 ```
 postgresql://localhost:mysecretpassword@localhost:5432/dvdrental
 ```
+
+[Checking out examples? Check here](/2020-03-15-Running-the-examples/)
