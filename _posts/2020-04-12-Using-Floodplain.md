@@ -232,7 +232,11 @@ Imagine this situation: We update a certain record many times in quick successio
 
 Combined with the 'write amplification' factors we talked about before it can really make a difference in performance.
 
-TODO: Code example
+In this case, we might want to wait a bit to propagate. If, for example, there is no issue when the sink data is out of date for let's say a minute, we can prevent a lot of downstream traffic by just sitting on an update for a minute, and only propagate the last of these updates during that time window.
+
+It is even clearer when the downstream sink isn't just a datastore, but also a notification mechanism. If something updated several times in a few seconds, you generally want only one notification.
+
+TODO: Code example / Not completely integrated atm.
 
 ```kotlin
 buffer(20000)
@@ -246,11 +250,79 @@ In our movie rental database, we have customers. Every customer has an address_i
 However, there is also a table 'store' (like in brick and mortar shops). Stores also have an address_id. There is also a table 'staff', you guessed it, staff also links to the address table.
 If we were to implement this naively, kafka streams would complain (paraphrasing) that you have already added the address table, and can't use it again.
 One solution would be to simply run three topologies (not implemented at the time of writing TODO).
-This is possible but it has an
+This is possible but it could be more efficient.
+In our current dvd rental model, the data model takes denormalization (in my opinion) to an extreme. An address object does not contain an entire address, it contains address attributes, but it also has a 'city_id' which points to a list of known cities. Not only that, the city table has a country_id, that points to a list of known countries.
+
+We have all the tools we need to flatten this to single address object:
+
+```kotlin
+postgresSource("public", "address", postgresConfig) {
+joinRemote({ msg -> "${msg["city_id"]}" }, false) {
+    postgresSource("public", "city", postgresConfig) {
+        joinRemote({ msg -> "${msg["country_id"]}" }, false) {
+            postgresSource("public", "country", postgresConfig) {}
+        }
+        set { msg, state ->
+            msg.set("country", state)
+        }
+    }
+}
+set { msg, state ->
+    msg.set("city", state)
+}
+// ... some sink
+}
+
+```
+
+No particular challenge, but now we have an address topic that we want to join to several 'toplevel' topic that we want to represent in our sink: Customer, store, and staff.
+
+Instead of re-joining these address components every time, we can create an 'internal' sink
+
+```kotlin
+  sink("address")
+```
+
+This sink will write the joined result into an internal Kafka topic. Then we can read from this topic and join it to multiple others:
+
+```kotlin
+            postgresSource("public", "customer", postgresConfig) {
+                joinRemote({ m -> "${m["address_id"]}" }, false) {
+                    source("address") {}
+                }
+                set { msg, state ->
+                    msg.set("address", state)
+                }
+                mongoSink("customer", "filtertopic", mongoConfig)
+            }
+            postgresSource("public", "staff", postgresConfig) {
+                joinRemote({ m -> "${m["address_id"]}" }, false) {
+                    source("address") {}
+                }
+                set { msg, state ->
+                    msg.set("address", state)
+                }
+                mongoSink("staff", "stafftopic", mongoConfig)
+            }
+            postgresSource("public", "staff", postgresConfig) {
+                joinRemote({ m -> "${m["address_id"]}" }, false) {
+                    source("address") {}
+                }
+                set { msg, state ->
+                    msg.set("address", state)
+                }
+                mongoSink("store", "storetopic", mongoConfig)
+            }
+```
+
+Now the address/city/country join only needs to be performed once. Note it still isn't particularly efficient, as it is impossible to see from an address record of it is a customer address, a staff address or a store address, so for large datasets this is still an expensive operation.
+For the tiny dataset we have here it is not a problem at all, but image there are hundreds of millions of address objects, but only a handful of 'store' objects, in order to make this join we need to go through those hundreds of millions of records, very rarely matching anything.
+This pattern of having one big table to serve multiple other tables (Many SQL designers consider that a best practice) is an antipattern for CDC applications.
 
 ## Source connectors
 
 Kafka Connect sources and sinks should work basically work out of the box, the only thing floodplain needs is a strongly-typed configuration object.
+
 TODO
 
 ## Sink Connectors
@@ -283,4 +355,7 @@ As stated in the readme, you can connect to this database using this connection 
 postgresql://localhost:mysecretpassword@localhost:5432/dvdrental
 ```
 
+Further reading?
 [Checking out examples? Check here](/2020-03-15-Running-the-examples/)
+[High level architecture (Very WIP)](/2020-04-02-Floodplain-Architecture/)
+[Deep dive?](/2020-04-03-Floodplain-Deepdive)
