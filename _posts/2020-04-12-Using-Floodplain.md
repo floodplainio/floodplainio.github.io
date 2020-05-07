@@ -29,20 +29,20 @@ It looks something like this:
 
 ```kotlin
 fun main() {
-    pipe("mygeneration") {
+    stream {
         val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
         val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
         postgresSource("public","actor",pgConfig) {
             mongoSink(topologyContext,"mycollection","sometopic",mongoConfig)
         }
-    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092", UUID.randomUUID().toString())
+    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092")
 }
 ```
 
 Lets' go through this small program. First we create a configuration two configuration objects for Postgres and MongoDB. The functions that create these are specific for that endpoint, so it will be obvious which and what kind of parameters are needed for configuration. The function signature is:
 
 ```kotlin
-fun Pipe.postgresSourceConfig(name: String, hostname: String,port: Int, username: String, password: String, database: String): PostgresConfig {}
+fun Stream.postgresSourceConfig(name: String, hostname: String,port: Int, username: String, password: String, database: String): PostgresConfig {}
 ```
 
 This is an advantage of configuring a system using a strongly typed language. It is harder to get wrong, and an IDE can help you much better than when you are crafting a specific YAML to make ti work. Also, as we are in a regular Kotlin main function, we can supply these configuration properties in any way that works for us. In this case, we hard coded them in the code, that will usually not be optimal, but we can easily read them from environment variables, configuration files or some other configuration data source.
@@ -64,7 +64,7 @@ That lambda is a so called lambda with a receiver, so aside from supplying a fun
 This is the method signature of the 'postgresSource' function:
 
 ```kotlin
-fun Pipe.postgresSource(schema: String, table: String, config: PostgresConfig, init: Source.() -> Unit): Source {}
+fun Stream.postgresSource(schema: String, table: String, config: PostgresConfig, init: Source.() -> Unit): Source {}
 ```
 
 So whats happening here: The postgresSource method creates a Source object, and runs the lambda in the context of that source object. So within that lambda we can behave as if we are directly defining a method to the Source object.
@@ -91,6 +91,84 @@ The second transformation is a filter. A filter wants a lambda that takes a mess
 
 After that we still have the same mongodb sink, that will collect the data into the mongodb collection.
 
+## Deep dive
+
+Depending on your learning style, you might want to look into examples first, otherwise we'll explain what happens under the hood.
+The postgres source:
+
+```json
+{
+  "name": "mytenant-mydeployment-mypostgres",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "database.hostname": "postgres",
+    "database.port": "5432",
+    "database.dbname": "dvdrental",
+    "database.user": "postgres",
+    "database.password": "mysecretpassword",
+    "name": "mytenant-mydeployment-mypostgres",
+    "database.server.name": "mytenant-mydeployment-mypostgres"
+  },
+  "tasks": [],
+  "type": "source"
+}
+```
+
+The mongodb sink:
+
+```json
+{
+  "name": "mytenant-mydeployment-mymongo",
+  "config": {
+    "connector.class": "com.mongodb.kafka.connect.MongoSinkConnector",
+    "value.converter.schemas.enable": "false",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "com.dexels.kafka.converter.ReplicationMessageConverter",
+    "key.converter": "com.dexels.kafka.converter.ReplicationMessageConverter",
+    "document.id.strategy": "com.mongodb.kafka.connect.sink.processor.id.strategy.FullKeyStrategy",
+    "connection.uri": "mongodb://mongo",
+    "database": "mytenant-mydeployment-mygeneration-myinstance-mydatabase",
+    "collection": "mycollection",
+    "topics": "mytenant-mydeployment-sometopic",
+    "topic.override.mytenant-mydeployment-sometopic.collection": "mycollection",
+    "name": "mytenant-mydeployment-mymongo",
+    "database.server.name": "mytenant-mydeployment-mymongo"
+  },
+  "tasks": [],
+  "type": "sink"
+}
+```
+
+It will tell the postgres source and mongodb sink all it needs to know to get the data from the source into kafka and from kafka to the sink.
+
+Finally, we have the transformation. We create a so called 'topology', which is a standard Kafka Streams construct (using the Processor API) which we can then run. A topology is a sequence (actually a directed graph) of sources, processors and sinks. If we ask Kafka Streams to describe it, it looks like this:
+
+```
+Topology:
+ Topologies:
+   Sub-topology: 0
+    Source: mytenant-mydeployment-mypostgres.public.actor (topics: [mytenant-mydeployment-mypostgres.public.actor])
+      --> mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0 (stores: [])
+      --> mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
+      <-- mytenant-mydeployment-mypostgres.public.actor
+    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0 (stores: [])
+      --> mytenant-mydeployment-mygeneration-myinstance-set_1_1
+      <-- mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-set_1_1 (stores: [])
+      --> mytenant-mydeployment-mygeneration-myinstance-filter_1_2
+      <-- mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-filter_1_2 (stores: [])
+      --> SINK_mytenant-mydeployment-sometopic
+      <-- mytenant-mydeployment-mygeneration-myinstance-set_1_1
+    Sink: SINK_mytenant-mydeployment-sometopic (topic: mytenant-mydeployment-sometopic)
+      <-- mytenant-mydeployment-mygeneration-myinstance-filter_1_2
+```
+
+Not the most helpful format, it gets better with some visualization (kudos to zz85 to create [this open source visualization](https://zz85.github.io/kafka-streams-viz/), it's a tremendous help when figuring out topology issues )
+
+![alt text](/img/topology.png "Topology image")
+
 ## Stateful transformations
 
 In the original example we did a few transformations, but only transformations that involve only one message. The filter transformation decides to let a message pass or not, and the 'set' operation changes every message in the same way.
@@ -105,7 +183,7 @@ So if we want to join two topics, we need to store the records of both topics. W
 This is pretty straightforward. In floodplain Kotlin DSL this would look like this:
 
 ```kotlin
-    pipe("generation") {
+    stream("generation") {
         val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
         val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
         postgresSource("public","tableA",pgConfig) {
@@ -162,12 +240,12 @@ Let's have a look at another example:
 
 ```kotlin
 postgresSource("public","film",pgConfig) {
-	joinRemote({msg->msg["language_id"].toString()}) {
-		postgresSource("public","language",pgConfig) {} }
-	set {
-		film,language->film["language"]=language["name"]; film
-	}
-	mongoSink("filmwithlanguage","filmwithlanguage",mongoConfig)
+  joinRemote({msg->msg["language_id"].toString()}) {
+    postgresSource("public","language",pgConfig) {} }
+    set {
+      film,language->film["language"]=language["name"]; film
+  }
+  mongoSink("filmwithlanguage","filmwithlanguage",mongoConfig)
 }
 ```
 
@@ -216,25 +294,94 @@ Now we've grouped this table to film_id, we share the same key as film, so we ca
 
 ## Aggregations
 
-TODO
+We can aggregate over entire collections. It's easier to explain using an example:
+It looks like this:
+
+```kotlin
+source("@source") {
+    scan({ msg -> msg["total"] = 0; msg }, {
+        set { key, msg, acc -> acc["total"] = acc["total"] as Int + 1; acc }
+    }, {
+        set { key, msg, acc -> acc["total"] = acc["total"] as Int - 1; acc }
+    })
+    sink("@output")
+}
+```
+
+In this example, we want to keep a running count of a table. So every time a new key is added, we add one. If we delete one, we delete one. (For an update we actually do both, we propagate a delete of the old record, then an insert of the new one)
+
+First we need to initialize our 'accumulator', which is our persistent datastructure of this operator. This is the first parameter. It creates an empty message, with a 'total' integer counter.
+
+We have a source, and the scan operator takes one initialize lambda, and two 'blocks' (a block is a sequence of one or more transformers). One block for inserts / updates, and one for deletes.
+Usually we use a 'set' transformer here. The set transformer takes a lambda, that gives us three input variables: key, message and accumulator.
+The key is the key of the incoming message, and we don't use it here (we could replace it by an '\_'). The message is the incoming message, in this particular case we're also not really interested in its contents (as we're only counting messages), but usually we are.
+Finally we get the accumulator message. This is the persistent message. We can modify it in the lambda and return it. That version of the message will be used the next time a message gets inserted or deleted.
+In this case, we simple add or subtract one for inserts or deletes.
+The transformer itself emits the accumulator message on every change, in this case a message with a 'total' field that will contain the current table size.
+
+## Aggregations with key
+
+Very similar to the aggregator we can also aggregate using a key, it is essentially a 'GROUP BY' clause in SQL.
+It looks similar:
+
+```kotlin
+source("@source") {
+    scan({ msg -> msg["groupKey"] as String }, { msg -> msg["total"] = 0; msg }, {
+        set { _, _, acc -> acc["total"] = acc["total"] as Int + 1; acc }
+    }, {
+        set { _, _, acc -> acc["total"] = acc["total"] as Int - 1; acc }
+    })
+    sink("@output")
+}
+```
+
+In this case we're also counting the total, but grouped by the key 'groupKey', so this time we won't emit a single message, but table messages with 'groupKey' as key.
+Codewise, the only difference is adding the group key extraction lambda, the first parameter of scan:
+
+```kotlin
+msg -> msg["groupKey"] as String
+```
+
+We define how the scanner should extract its grouped key from the incoming messages, and every grouped key gets its own accumulator message.
 
 ## Splitting topics
 
-TODO
+In some cases, we want to listen to a topic, and depending on the message (or the key), we want to send it to different destinations.
+To this end we have a 'fork' transformer. A fork contains one or more 'blocks', just like for aggregations. A block depicts how a stream will proceed. In a nutshell, a block is a stream, minus the initial source.
+It is easier to show an example:
+
+```kotlin
+fun fork() {
+      stream("gen") {
+          source("@source") {
+              fork(
+                      {
+                          filter { _, value -> value["category"] == "category1" }
+                          sink("@category1")
+                      },
+                      {
+                          filter { _, value -> value["category"] == "category2" }
+                          sink("@category2")
+                      },
+                      {
+                          sink("@all")
+                      }
+              )
+              sink("@sink")
+          }
+      }
+}
+```
 
 ## Buffering
 
 Floodplain is an eventual consistency model: Changes in the source database propagate to the destination source in near-realtime, but there **is** a measurable delay. So you **can** update the source database, and immediately check the destination database and still see the old value.
-
 Usually we want to minimize this delay to minimize this possible window of inconsistency, but sometimes we don't mind, and we even want to create a conscious delay in updating the destination.
 
 Imagine this situation: We update a certain record many times in quick succession, simply because that is our workflow, or how our existing code works. Now conceptually we only need to propagate the last version of that record, as we would overwrite that version immediately with the next version.
 
 Combined with the 'write amplification' factors we talked about before it can really make a difference in performance.
-
-In this case, we might want to wait a bit to propagate. If, for example, there is no issue when the sink data is out of date for let's say a minute, we can prevent a lot of downstream traffic by just sitting on an update for a minute, and only propagate the last of these updates during that time window.
-
-It is even clearer when the downstream sink isn't just a datastore, but also a notification mechanism. If something updated several times in a few seconds, you generally want only one notification.
+In this case, we might want to wait a bit to propagate. If, for example, there is no issue when the sink data is out of date for let's say a minute, we can prevent a lot of downstream traffic by just sitting on an update for a minute, and only propagate the last of these updates during that time window. It is even clearer when the downstream sink isn't just a datastore, but also a notification mechanism. If something updated several times in a few seconds, you generally want only one notification.
 
 TODO: Code example / Not completely integrated atm.
 
@@ -242,9 +389,26 @@ TODO: Code example / Not completely integrated atm.
 buffer(20000)
 ```
 
+## Differential operator
+
+This is an operator that can reduce the number of propagated messages, and reduce the load on downstream systems. The diff transformer will store the latest value for each key. When a new message arrives, it will compare the message to the stored one. When the messages are identical, the message will be ignored. Otherwise, it updates the store and forwards the new message.
+
+```kotlin
+stream("gen") {
+    source("@source") {
+        diff()
+        sink("@output")
+    }
+}
+```
+
+For example we might listen to a change feed topic, but if we are not interested in certain columns, we can prevent messages that only touch those columns.
+
 ## Composing topologies
 
-There is a constraint in Kafka Streams topologies we have not mentioned yet. That restriction is: We can use a source only _once_ in a topology.
+//There is a constraint in Kafka Streams topologies we have not mentioned yet. That restriction is: We can use a source only _once_ in a topology.
+no longer true, TODO rewite this part.
+
 Why would you want to do that? Let me show an example.
 In our movie rental database, we have customers. Every customer has an address_id, which points to a record in the 'address' table. If we want to create a record of a customer with their address, a simple join statement works fine.
 However, there is also a table 'store' (like in brick and mortar shops). Stores also have an address_id. There is also a table 'staff', you guessed it, staff also links to the address table.

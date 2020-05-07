@@ -11,35 +11,37 @@ So how does Floodplain work?
 
 ```kotlin
 fun main() {
-    pipe("mygeneration") {
+    stream("mygeneration") {
         val pgConfig = postgresSourceConfig("mypostgres","postgres",5432,"postgres","mysecretpassword","dvdrental")
         val mongoConfig = mongoConfig("mymongo","mongodb://mongo","mydatabase")
         postgresSource("public","actor",pgConfig) {
             mongoSink(topologyContext,"mycollection","sometopic",mongoConfig)
         }
-    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092", UUID.randomUUID().toString())
+    }.renderAndStart(URL( "http://localhost:8083/connectors"),"kafka:9092")
 }
 ```
 
-When we run this code, the pipe() function call creates a pipe object, this is the toplevel floodplain construct. The pipe contains one or more (toplevel) source objects. Every source object contains zero or more transformations, terminated by a sink.
+When we run this code, the stream() function call creates a stream object, this is the toplevel floodplain construct. The stream contains one or more (toplevel) source objects. Every source object contains zero or more transformations, terminated by a sink.
 Some transformations, like joins, can contain other sources.
 
-The pipe() call takes a generation string (more on that later) and returns a Pipe() object.
-On the Pipe object we can call the render() method, which returns three values (using a Triple): A list of source configurations, a list of sink configurations and a Kafka Streams Topology.
+The streams() call takes a few optional parameters (more on that later), and one targeted lambda expression and returns a Stream() object.
+On the Stream object we can call the render() method, which returns three values (using a Triple): A list of source configurations, a list of sink configurations and a Kafka Streams Topology.
+
 The source and sink configurations are JSON strings, which we can POST to a Kafka Connect instance, and finally we can use a KafkaStreams instance to run the Topology instance.
 
-We can shorthand this by calling this method on pipe:
+We can shorthand this by calling this method on stream:
 
 ```kotlin
-fun renderAndStart(connectorURL:URL, kafkaHosts: String, clientId: String) {}
+fun renderAndStart(connectorURL:URL, kafkaHosts: String) {}
 ```
 
 ... where we have to supply the URL to post the JSON config objects, a connection string for the Kafka cluster, and finally a clientId for the streams run.
 
 ## Generations
 
-Previously we mentioned the 'generation' string when rendering a pipe. We use that string to differentiate different runs of a topology. We need something like this due to the stateful nature of Floodplain runs. Remember, when we start a run, it will start reading the sources, perform the transformations and send the results to the sinks. Now if we stop this instance, and start it again, it will continue where it left off.
-Now if we want to change something in the code, we can do so, and restart again, but then we end up in a weird state: Everything up to now, all stateful tranformations and sinks contain data created by the 'old' code, but every new change will be processed by the new code. This might create a result that neither the old code nor the new code could create, so changing a 'running' topology (and by running I include stopped and later continued instances) should be done with great care.
+Previously we mentioned the 'generation' string when rendering a stream. We use that string to differentiate different runs of a topology. We need something like this due to the stateful nature of Floodplain runs. Remember, when we start a run, it will start reading the sources, perform the transformations and send the results to the sinks. It will create internal topics to perform some transformations, and all stateful transformations are backed by state stores, which are also stored in KAfka.
+Now if we stop this instance, and start it again, it will continue where it left off.
+If we want to change something in the code, we can do so, and restart again, but then we end up in a weird state: Everything up to now, all stateful tranformations and sinks contain data created by the 'old' code, but every new change will be processed by the new code. This might create a result that neither the old code nor the new code could create, so changing a 'running' topology (and by running I include stopped and later continued instances) should be done with great care.
 
 Usually it is wiser to create a new generation: Use different topics, different consumerIds, so it starts from scratch. An additional benefit of having an entire new set of consumers and topics, is that we can leave the old topology running, and running the new one in parallel. When both run in parallel, we can assess both topologies, and if we are happy with the new version, and we're sure the old version is no longer used, we can stop and delete the old instance.
 
