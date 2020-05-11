@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="generator" content="Hugo 0.70.0" />
 
-<META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+<META NAME="ROBOTS" CONTENT="INDEX, FOLLOW">
 
 <link rel="alternate" type="application/rss&#43;xml" href="/docs/tutorials/index.xml">
 
@@ -22,17 +22,30 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Tutorials | Floodplain</title><meta property="og:title" content="Tutorials" />
-<meta property="og:description" content="Show your user how to work through some end to end examples.
+<meta property="og:description" content="Using Floodplain
 " />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/docs/tutorials/" />
-<meta property="og:updated_time" content="2017-01-04T00:00:00+00:00" /><meta property="og:site_name" content="Floodplain" />
+<meta property="og:updated_time" content="2020-05-08T00:00:00+00:00" /><meta property="og:site_name" content="Floodplain" />
 <meta itemprop="name" content="Tutorials">
-<meta itemprop="description" content="Show your user how to work through some end to end examples.
+<meta itemprop="description" content="Using Floodplain
 "><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Tutorials"/>
-<meta name="twitter:description" content="Show your user how to work through some end to end examples.
+<meta name="twitter:description" content="Using Floodplain
 "/>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-00000000-0', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 
 
 
@@ -257,82 +270,6 @@
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/tasks/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Core Tasks</a>
-  </li>
-  <ul>
-    <li class="collapse " id="docstasks">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstasksbeds" href="/docs/tasks/beds/">Bed and Chair Metrics</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstasksporridge" href="/docs/tasks/porridge/">Porridge Assessment</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstaskstask" href="/docs/tasks/task/">Another Task</a>
-      
-      
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/tasks/ponycopters/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Working with Ponycopters</a>
-  </li>
-  <ul>
-    <li class="collapse " id="docstasksponycopters">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstasksponycoptersconfiguring-ponycopters" href="/docs/tasks/ponycopters/configuring-ponycopters/">Configuring Ponycopters</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstasksponycopterslaunching-ponycopters" href="/docs/tasks/ponycopters/launching-ponycopters/">Launching Ponycopters</a>
-      
-      
-    </li>
-  </ul>
-</ul>
-
-      
-      
-    </li>
-  </ul>
-</ul>
-
-      
-      
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
     <a  href="/docs/tutorials/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">Tutorials</a>
   </li>
   <ul>
@@ -343,13 +280,7 @@
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstutorialsmulti-bear" href="/docs/tutorials/multi-bear/">Multi-Bear Domicile Setup</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstutorialstutorial2" href="/docs/tutorials/tutorial2/">Another Tutorial</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docstutorialsmulti-bear" href="/docs/tutorials/multi-bear/">Running the standalone demo app</a>
       
       
     </li>
@@ -372,35 +303,6 @@
   </li>
   <ul>
     <li class="collapse " id="docsreference">
-      
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsreferenceparameter-reference" href="/docs/reference/parameter-reference/">Parameter Reference</a>
-      
-      
-    </li>
-  </ul>
-</ul>
-
-      
-      
-      
-      
-
-
-
-
-
-
-<ul class="td-sidebar-nav__section pr-md-3">
-  <li class="td-sidebar-nav__section-title">
-    <a  href="/docs/contribution-guidelines/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Contribution Guidelines</a>
-  </li>
-  <ul>
-    <li class="collapse " id="docscontribution-guidelines">
       
       
       
@@ -448,6 +350,25 @@
 
 
 
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#how-does-it-work">How does it work?</a></li>
+    <li><a href="#deep-dive">Deep dive</a></li>
+    <li><a href="#stateful-transformations">Stateful transformations</a></li>
+    <li><a href="#many-to-many-relationships">Many-to-many relationships.</a></li>
+    <li><a href="#aggregations">Aggregations</a></li>
+    <li><a href="#aggregations-with-key">Aggregations with key</a></li>
+    <li><a href="#splitting-topics">Splitting topics</a></li>
+    <li><a href="#buffering">Buffering</a></li>
+    <li><a href="#differential-operator">Differential operator</a></li>
+    <li><a href="#composing-topologies">Composing topologies</a></li>
+    <li><a href="#source-connectors">Source connectors</a></li>
+    <li><a href="#sink-connectors">Sink Connectors</a></li>
+    <li><a href="#extending-floodplain-creating-your-own-connectors-and-transformers">Extending floodplain: Creating your own connectors and transformers</a></li>
+    <li><a href="#example">Example</a></li>
+  </ul>
+</nav>
+
 
 
           </div>
@@ -482,17 +403,354 @@
             
 <div class="td-content">
 	<h1>Tutorials</h1>
-        <div class="lead">Show your user how to work through some end to end examples.</div>
+        <div class="lead">Using Floodplain</div>
 	
-	
+	<h2 id="how-does-it-work">How does it work?</h2>
+<p>Floodplain is a Kotlin library. Most of it is written in Java, but the fact that Kotlin has extension functions and much better DSL capabilities, we chose for Kotlin.</p>
+<p>We can write code in a Kotlin DSL that defines how our system can acquire data, transform it, and send it to a sink.</p>
+<p>This Kotlin DSL is just a certain &lsquo;shape&rsquo; we put our code in, for the rest it is just regular Kotlin, so we can use all kind of 3rd party Kotlin Libraries (or other JVM libraries for that matter)</p>
+<p>We will &lsquo;compile&rsquo; that code to a Kafka Streams definition (a &lsquo;topology&rsquo; as we call it in the Kafka lingo), and a set of &lsquo;connect configs&rsquo; that we can send to a Kafka Connect instance, so it will know how to configure the data sources and sinks.</p>
+<p>So in pseudo code it looks something like this
+(define source) -&gt; (define transformation) -&gt; (define sink)</p>
+<p>To make it a bit more specific:
+(configure sources and sinks)
+(define source) -&gt; (define transformation) -&gt; (define sink)
+&hellip; repeat as necessary</p>
+<p>In real code it does get a bit more involved. Let&rsquo;s take a concrete example where we want to stream the contents of one single table in Postgres into a collection in MongoDB, without any fancy transformations in between.</p>
+<p>It looks something like this:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">stream</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">pgConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">postgresSourceConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mypostgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">5432</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mysecretpassword&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;dvdrental&#34;</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">mongoConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mymongo&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mongodb://mongo&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mydatabase&#34;</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;actor&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">topologyContext</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;sometopic&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}.</span><span style="color:#000">renderAndStart</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">URL</span><span style="color:#000;font-weight:bold">(</span> <span style="color:#4e9a06">&#34;http://localhost:8083/connectors&#34;</span><span style="color:#000;font-weight:bold">),</span><span style="color:#4e9a06">&#34;kafka:9092&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>Lets&rsquo; go through this small program. First we create a configuration two configuration objects for Postgres and MongoDB. The functions that create these are specific for that endpoint, so it will be obvious which and what kind of parameters are needed for configuration. The function signature is:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">Stream</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">postgresSourceConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">name</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">hostname</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">port</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Int</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">username</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">password</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">database</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#000">PostgresConfig</span> <span style="color:#000;font-weight:bold">{}</span>
+</code></pre></div><p>This is an advantage of configuring a system using a strongly typed language. It is harder to get wrong, and an IDE can help you much better than when you are crafting a specific YAML to make ti work. Also, as we are in a regular Kotlin main function, we can supply these configuration properties in any way that works for us. In this case, we hard coded them in the code, that will usually not be optimal, but we can easily read them from environment variables, configuration files or some other configuration data source.</p>
+<p>But the next part is where it gets interesting:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;actor&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;sometopic&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>In this part we request the &lsquo;actor&rsquo; table (in the &lsquo;public&rsquo; schema) in our postgres config to be streamed though our system. After that we stream it directly to a mongodb sink, to a collection &ldquo;mycollection&rdquo; (using a topic called &ldquo;sometopic&rdquo; but that does not matter too much here)</p>
+<p>Note for those unfamiliar with the Kotlin lambda syntax, the postgresSource is a method call with 4(!) parameters, two strings, a configuration object and a lambda. So the part between the curly brackets is actually the last parameter.</p>
+<p>That lambda is a so called lambda with a receiver, so aside from supplying a function, we also supply a receiver, basically what &lsquo;this&rsquo; means in the context of that function.</p>
+<p>This is the method signature of the &lsquo;postgresSource&rsquo; function:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">Stream</span><span style="color:#000;font-weight:bold">.</span><span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">schema</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">table</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">String</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">config</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">PostgresConfig</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">init</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Source</span><span style="color:#000;font-weight:bold">.()</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">Unit</span><span style="color:#000;font-weight:bold">):</span> <span style="color:#000">Source</span> <span style="color:#000;font-weight:bold">{}</span>
+</code></pre></div><p>So whats happening here: The postgresSource method creates a Source object, and runs the lambda in the context of that source object. So within that lambda we can behave as if we are directly defining a method to the Source object.</p>
+<p>Perhaps this is obvious to Kotlin veterans, but it is essential to understand this aspect.</p>
+<p><a href="https://kotlinlang.org/docs/reference/lambdas.html#function-literals-with-receiver">kotlin reference</a></p>
+<p>Now, back to our example. In this case, the only thing we supply is a sink transformation. Generally all source instances end with a sink (or possibly more than one (Not implemented at the moment))</p>
+<p>Let&rsquo;s make our example a little bit more interesting.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;actor&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+	<span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">_</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;last_update&#34;</span><span style="color:#000;font-weight:bold">]=</span><span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000">filter</span> <span style="color:#000;font-weight:bold">{</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">_</span> <span style="color:#000;font-weight:bold">-&gt;(</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;actor_id&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">Int</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">&lt;</span> <span style="color:#0000cf;font-weight:bold">10</span><span style="color:#000;font-weight:bold">}</span>
+	<span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;sometopic&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>We&rsquo;ve added two transformers to our source. First, &lsquo;set&rsquo; is a single message transformation. So every message gets passed through this function, and will return a single message as well (Not completely true: In a later chapter we&rsquo;ll address the second parameter, usually called state). In this case, we&rsquo;ll remove a column, the &lsquo;last_update&rsquo; column. This is a field that was in the original Postgres database, and if we know we&rsquo;re not interested in this field downstream, it makes sense to remove it as soon as possible.</p>
+<p>The second transformation is a filter. A filter wants a lambda that takes a message, and returns a boolean. If true, the message will propagat, otherwise the message gets dropped. In this case we take the actor_id field, assert that it is an integer, and only propagate actor_id that is lower than 10.</p>
+<p>After that we still have the same mongodb sink, that will collect the data into the mongodb collection.</p>
+<h2 id="deep-dive">Deep dive</h2>
+<p>Depending on your learning style, you might want to look into examples first, otherwise we&rsquo;ll explain what happens under the hood.
+The postgres source:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mypostgres&#34;</span><span style="color:#000;font-weight:bold">,</span>
+  <span style="color:#204a87;font-weight:bold">&#34;config&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">&#34;connector.class&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;io.debezium.connector.postgresql.PostgresConnector&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.hostname&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.port&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;5432&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.dbname&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;dvdrental&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.user&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.password&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mysecretpassword&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mypostgres&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.server.name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mypostgres&#34;</span>
+  <span style="color:#000;font-weight:bold">},</span>
+  <span style="color:#204a87;font-weight:bold">&#34;tasks&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[],</span>
+  <span style="color:#204a87;font-weight:bold">&#34;type&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;source&#34;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>The mongodb sink:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mymongo&#34;</span><span style="color:#000;font-weight:bold">,</span>
+  <span style="color:#204a87;font-weight:bold">&#34;config&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#204a87;font-weight:bold">&#34;connector.class&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;com.mongodb.kafka.connect.MongoSinkConnector&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;value.converter.schemas.enable&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;key.converter.schemas.enable&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;false&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;value.converter&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;com.dexels.kafka.converter.ReplicationMessageConverter&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;key.converter&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;com.dexels.kafka.converter.ReplicationMessageConverter&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;document.id.strategy&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;com.mongodb.kafka.connect.sink.processor.id.strategy.FullKeyStrategy&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;connection.uri&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mongodb://mongo&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mygeneration-myinstance-mydatabase&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;collection&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;topics&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-sometopic&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;topic.override.mytenant-mydeployment-sometopic.collection&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mymongo&#34;</span><span style="color:#000;font-weight:bold">,</span>
+    <span style="color:#204a87;font-weight:bold">&#34;database.server.name&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;mytenant-mydeployment-mymongo&#34;</span>
+  <span style="color:#000;font-weight:bold">},</span>
+  <span style="color:#204a87;font-weight:bold">&#34;tasks&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000;font-weight:bold">[],</span>
+  <span style="color:#204a87;font-weight:bold">&#34;type&#34;</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#4e9a06">&#34;sink&#34;</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>It will tell the postgres source and mongodb sink all it needs to know to get the data from the source into kafka and from kafka to the sink.</p>
+<p>Finally, we have the transformation. We create a so called &lsquo;topology&rsquo;, which is a standard Kafka Streams construct (using the Processor API) which we can then run. A topology is a sequence (actually a directed graph) of sources, processors and sinks. If we ask Kafka Streams to describe it, it looks like this:</p>
+<pre><code>Topology:
+ Topologies:
+   Sub-topology: 0
+    Source: mytenant-mydeployment-mypostgres.public.actor (topics: [mytenant-mydeployment-mypostgres.public.actor])
+      --&gt; mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0 (stores: [])
+      --&gt; mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
+      &lt;-- mytenant-mydeployment-mypostgres.public.actor
+    Processor: mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0 (stores: [])
+      --&gt; mytenant-mydeployment-mygeneration-myinstance-set_1_1
+      &lt;-- mytenant-mydeployment-mygeneration-myinstance-debezium_debconv_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-set_1_1 (stores: [])
+      --&gt; mytenant-mydeployment-mygeneration-myinstance-filter_1_2
+      &lt;-- mytenant-mydeployment-mygeneration-myinstance-debezium_deb_1_0
+    Processor: mytenant-mydeployment-mygeneration-myinstance-filter_1_2 (stores: [])
+      --&gt; SINK_mytenant-mydeployment-sometopic
+      &lt;-- mytenant-mydeployment-mygeneration-myinstance-set_1_1
+    Sink: SINK_mytenant-mydeployment-sometopic (topic: mytenant-mydeployment-sometopic)
+      &lt;-- mytenant-mydeployment-mygeneration-myinstance-filter_1_2
+</code></pre><p>Not the most helpful format, it gets better with some visualization (kudos to zz85 to create <a href="https://zz85.github.io/kafka-streams-viz/">this open source visualization</a>, it&rsquo;s a tremendous help when figuring out topology issues )</p>
+<p><img src="/img/topology.png" alt="alt text" title="Topology image"></p>
+<h2 id="stateful-transformations">Stateful transformations</h2>
+<p>In the original example we did a few transformations, but only transformations that involve only one message. The filter transformation decides to let a message pass or not, and the &lsquo;set&rsquo; operation changes every message in the same way.</p>
+<p>That does not cover all cases. Sometimes we need transformations that &lsquo;remember&rsquo; messages that have come before.</p>
+<p>A very common example of one of these operations is a join: Imagine we have two tables, we create two sources to receive those tables, and we&rsquo;d like to join the records of these tables to one, combined record. For simplicity&rsquo;s sake, lets assume these tables share the same key space.</p>
+<p>Now one thing we can&rsquo;t do (at least at this point) is <em>querying</em> data. We receive versions of records. An insert is a record with a new, unseen key. An update is a new version of a record with a known key. A delete is a known key, but with no record at all. We have no control of when we get those updates.
+So if we want to join two topics, we need to store the records of both topics. When a record appears on topic A, we check our local store of topic B, to see if there is a matching record with the same key. If we find one, we combine the two (somehow). If there is no matching record in Topic B, we simply save the message in the local storage of Topic A. When, at some point, a record appears in topic B with the matching key, we will retrieve the record from topic A.</p>
+<p>This is pretty straightforward. In floodplain Kotlin DSL this would look like this:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">    <span style="color:#000">stream</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;generation&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">pgConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">postgresSourceConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mypostgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#0000cf;font-weight:bold">5432</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mysecretpassword&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;dvdrental&#34;</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">mongoConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mymongo&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mongodb://mongo&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;mydatabase&#34;</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;tableA&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">join</span> <span style="color:#000;font-weight:bold">{</span>
+                <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;tableB&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span>
+            <span style="color:#000;font-weight:bold">}</span>
+            <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span>
+                <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">msg2</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;topicBSubMessage&#34;</span><span style="color:#000;font-weight:bold">]=</span><span style="color:#000">msg2</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">msg</span>
+            <span style="color:#000;font-weight:bold">}</span>
+            <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mycollection&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;sometopic&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>We add a join transformer to our source (the topicA source), which will contain another source, topicB
+After this transformation, whenever a join matches we <em>still have two messages</em>, one from topicA, and one from topicB, both with the same key.
+Every transformer can emit one &lsquo;main&rsquo; message, and another secondary message. The semantics of the second message depends on the transformation. In the case of a join, it is the message the main source was joined with.</p>
+<p>Secondary messages don&rsquo;t survive, they only make it to the next transformer, so if you want to save anything, you will need to merge the messages. In this case, in the &lsquo;set&rsquo; operator, we add the entire secondary message as a submessage into the main message.</p>
+<p>This is pretty easy to express but sadly, this particular situation is actually pretty uncommon in SQL databases (meaning two tables that share the same key space). Usually it gets a bit more complex, for example when there is a one-to-many relationship between tables.</p>
+<p>Let&rsquo;s take a look at the (simplified) data model of our example app. Two tables, film and language. Every film has a field &lsquo;language_id&rsquo;, which points to a record in the language table. In PostgresDDL, the Film table:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#204a87;font-weight:bold">CREATE</span> <span style="color:#204a87;font-weight:bold">TABLE</span>
+    <span style="color:#000">film</span>
+    <span style="color:#000;font-weight:bold">(</span>
+        <span style="color:#000">film_id</span> <span style="color:#204a87">SERIAL</span> <span style="color:#204a87;font-weight:bold">NOT</span> <span style="color:#204a87;font-weight:bold">NULL</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000">title</span> <span style="color:#204a87">CHARACTER</span> <span style="color:#204a87">VARYING</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">255</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">NOT</span> <span style="color:#204a87;font-weight:bold">NULL</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000">language_id</span> <span style="color:#204a87">SMALLINT</span> <span style="color:#204a87;font-weight:bold">NOT</span> <span style="color:#204a87;font-weight:bold">NULL</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">CONSTRAINT</span> <span style="color:#000">film_language_id_fkey</span> <span style="color:#204a87;font-weight:bold">FOREIGN</span> <span style="color:#204a87;font-weight:bold">KEY</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">language_id</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">REFERENCES</span> <span style="color:#4e9a06">&#34;language&#34;</span>
+        <span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;language_id&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">ON</span>
+    <span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>and the language table:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#204a87;font-weight:bold">CREATE</span> <span style="color:#204a87;font-weight:bold">TABLE</span>
+    <span style="color:#204a87;font-weight:bold">language</span>
+    <span style="color:#000;font-weight:bold">(</span>
 
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page that shows you how to use this template site.</p>
+        <span style="color:#000">language_id</span> <span style="color:#204a87">SERIAL</span> <span style="color:#204a87;font-weight:bold">NOT</span> <span style="color:#204a87;font-weight:bold">NULL</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#000">name</span> <span style="color:#204a87">CHARACTER</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">20</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#204a87;font-weight:bold">NOT</span> <span style="color:#204a87;font-weight:bold">NULL</span><span style="color:#000;font-weight:bold">,</span>
+        <span style="color:#204a87;font-weight:bold">PRIMARY</span> <span style="color:#204a87;font-weight:bold">KEY</span> <span style="color:#000;font-weight:bold">(</span><span style="color:#000">language_id</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">);</span>
+</code></pre></div><p>So if I want to include the name of the language in a downstream film, I need to join these two. Clearly in this case the two tables have different keys (film_id vs. language_id). Even if they would have the same name and type, they are different keys: Film # 1 is something completely different to Language # 1.
+To make this work we will need to access the language_id field of film, and use that to join with the language table. For that, we have the joinRemote transformation. In a join remote transformation we have an additional parameter, a lambda that extracts the remote key from the message.</p>
+<p>Let&rsquo;s have a look at another example:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;film&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+  <span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;language_id&#34;</span><span style="color:#000;font-weight:bold">].</span><span style="color:#000">toString</span><span style="color:#000;font-weight:bold">()})</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;language&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span>
+      <span style="color:#000">film</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">language</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#000">film</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;language&#34;</span><span style="color:#000;font-weight:bold">]=</span><span style="color:#000">language</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;name&#34;</span><span style="color:#000;font-weight:bold">];</span> <span style="color:#000">film</span>
+  <span style="color:#000;font-weight:bold">}</span>
+  <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;filmwithlanguage&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#4e9a06">&#34;filmwithlanguage&#34;</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>The key extraction lambda:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000;font-weight:bold">{</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;language_id&#34;</span><span style="color:#000;font-weight:bold">].</span><span style="color:#000">toString</span><span style="color:#000;font-weight:bold">()}</span>
+</code></pre></div><p>Will extract the language_id field from the message, and convert it to a string (in floodplain <strong>all keys</strong> are strings.)
+After that, the set statement will add the &lsquo;name&rsquo; field from the language record to the film record, and send it on its way to mongodb.
+There are some interesting observations to make here: This is a many-to-one relationship: Many films exist that share the same language, while (in this data model at least) films have only one language.
+So once this floodplain transformation is running, every time a film changes, this join is performed again, and the new record is inserted into mongodb.
+However, if a language name changes (I know, does not seem too common, but for arguments sake), that would imply that every film in that language should be re-joined with that new name, and sent to mongodb again.
+So if my database has 1000 movies in Spanish, and I would like to change the name of the Spanish language to &lsquo;Castillian&rsquo;, that will result in 1000 new inserts into Mongodb.
+It is important to be aware of these &lsquo;write magnification&rsquo; effects, because as topologies get bigger, tiny source changes can have a &lsquo;butterfly effect&rsquo; in the number of downstream changes.</p>
+<p>So after this, in the resulting MongoDB collection, all records will have a &lsquo;language&rsquo; field, that will show the string representation of the language. If the source database language changes, all MongoDB records will be updated.</p>
+<p>In a situation like this it might also make sense to remove the language_id field, as it is pretty meaningless in that space. It is bad form to expose keys to a table that does not exist, so a simple:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span><span style="color:#000">_</span><span style="color:#000;font-weight:bold">-&gt;</span><span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;language_id&#34;</span><span style="color:#000;font-weight:bold">]=</span><span style="color:#204a87;font-weight:bold">null</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>&hellip; would strip that field.</p>
+<p>The process we are doing now we call &lsquo;denormalization&rsquo;: Transforming a very structured data model that contains no duplication into a less structured, but simpler model.</p>
+<p>Typically, denormalization results in read access getting cheaper, but write access getting more expensive. We try to create a data model that is optimal for a certain read situation. Another way of looking at this is that we are performing the join whenever a record changes, instead of when someone queries it.</p>
+<h2 id="many-to-many-relationships">Many-to-many relationships.</h2>
+<p>Staying with our film datamodel, let explore the relationship between film and actor. A film typically features more than one actor, and an actor can obviously play in more than one film.
+In SQL databases we use a linking table for that: A special table that contains records with both a film_id and an actor_id, and within this table, neither film_id or actor_id are complete keys.</p>
+<p>Suppose we want to create a film info page, that can be served by quering a single document from our destination data base, including a list of actors. Because we only query one single document, it scales very easily and cheaply. As we mentioned when we addressed &lsquo;write amplification&rsquo;, changes to actors are relatively expensive: If we change an attribute of an actor, every single film document needs to be reassembled and rewritten to the destination database. In this particular case that does not seem to much of an issue as the data seems pretty infrequent in changing, but, again, it is important to keep this in mind.</p>
+<p>So how could we denormalize these tables in Floodplain?
+Before we get into code, let&rsquo;s assess the things we need to do.
+We&rsquo;re joining three tables: film, actor, and our linking table film_actor.
+First, we need to join the film_actor with the actor table (using the actor_id).
+Then we end up with a table with the same structure as the film_actor, only we&rsquo;ve copied all fields from actor to this table.
+Next, we are going to group this table to film_id, so we can join it later with the film table. So we end up with a &lsquo;table&rsquo; that contains a list of actors, with film_id as a key.
+Now we&rsquo;ve grouped this table to film_id, we share the same key as film, so we can join them together easily.</p>
+<h2 id="aggregations">Aggregations</h2>
+<p>We can aggregate over entire collections. It&rsquo;s easier to explain using an example:
+It looks like this:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@source&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">scan</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">Int</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">Int</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">})</span>
+    <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@output&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>In this example, we want to keep a running count of a table. So every time a new key is added, we add one. If we delete one, we delete one. (For an update we actually do both, we propagate a delete of the old record, then an insert of the new one)</p>
+<p>First we need to initialize our &lsquo;accumulator&rsquo;, which is our persistent datastructure of this operator. This is the first parameter. It creates an empty message, with a &lsquo;total&rsquo; integer counter.</p>
+<p>We have a source, and the scan operator takes one initialize lambda, and two &lsquo;blocks&rsquo; (a block is a sequence of one or more transformers). One block for inserts / updates, and one for deletes.
+Usually we use a &lsquo;set&rsquo; transformer here. The set transformer takes a lambda, that gives us three input variables: key, message and accumulator.
+The key is the key of the incoming message, and we don&rsquo;t use it here (we could replace it by an &lsquo;_'). The message is the incoming message, in this particular case we&rsquo;re also not really interested in its contents (as we&rsquo;re only counting messages), but usually we are.
+Finally we get the accumulator message. This is the persistent message. We can modify it in the lambda and return it. That version of the message will be used the next time a message gets inserted or deleted.
+In this case, we simple add or subtract one for inserts or deletes.
+The transformer itself emits the accumulator message on every change, in this case a message with a &lsquo;total&rsquo; field that will contain the current table size.</p>
+<h2 id="aggregations-with-key">Aggregations with key</h2>
+<p>Very similar to the aggregator we can also aggregate using a key, it is essentially a &lsquo;GROUP BY&rsquo; clause in SQL.
+It looks similar:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@source&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">scan</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;groupKey&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">String</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#0000cf;font-weight:bold">0</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">Int</span> <span style="color:#000;font-weight:bold">+</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">},</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">acc</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;total&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">Int</span> <span style="color:#000;font-weight:bold">-</span> <span style="color:#0000cf;font-weight:bold">1</span><span style="color:#000;font-weight:bold">;</span> <span style="color:#000">acc</span> <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">})</span>
+    <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@output&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>In this case we&rsquo;re also counting the total, but grouped by the key &lsquo;groupKey&rsquo;, so this time we won&rsquo;t emit a single message, but table messages with &lsquo;groupKey&rsquo; as key.
+Codewise, the only difference is adding the group key extraction lambda, the first parameter of scan:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;groupKey&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#204a87;font-weight:bold">as</span> <span style="color:#000">String</span>
+</code></pre></div><p>We define how the scanner should extract its grouped key from the incoming messages, and every grouped key gets its own accumulator message.</p>
+<h2 id="splitting-topics">Splitting topics</h2>
+<p>In some cases, we want to listen to a topic, and depending on the message (or the key), we want to send it to different destinations.
+To this end we have a &lsquo;fork&rsquo; transformer. A fork contains one or more &lsquo;blocks&rsquo;, just like for aggregations. A block depicts how a stream will proceed. In a nutshell, a block is a stream, minus the initial source.
+It is easier to show an example:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">fork</span><span style="color:#000;font-weight:bold">()</span> <span style="color:#000;font-weight:bold">{</span>
+      <span style="color:#000">stream</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;gen&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+          <span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@source&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+              <span style="color:#000">fork</span><span style="color:#000;font-weight:bold">(</span>
+                      <span style="color:#000;font-weight:bold">{</span>
+                          <span style="color:#000">filter</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;category&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;category1&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+                          <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@category1&#34;</span><span style="color:#000;font-weight:bold">)</span>
+                      <span style="color:#000;font-weight:bold">},</span>
+                      <span style="color:#000;font-weight:bold">{</span>
+                          <span style="color:#000">filter</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">value</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">value</span><span style="color:#000;font-weight:bold">[</span><span style="color:#4e9a06">&#34;category&#34;</span><span style="color:#000;font-weight:bold">]</span> <span style="color:#000;font-weight:bold">==</span> <span style="color:#4e9a06">&#34;category2&#34;</span> <span style="color:#000;font-weight:bold">}</span>
+                          <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@category2&#34;</span><span style="color:#000;font-weight:bold">)</span>
+                      <span style="color:#000;font-weight:bold">},</span>
+                      <span style="color:#000;font-weight:bold">{</span>
+                          <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@all&#34;</span><span style="color:#000;font-weight:bold">)</span>
+                      <span style="color:#000;font-weight:bold">}</span>
+              <span style="color:#000;font-weight:bold">)</span>
+              <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@sink&#34;</span><span style="color:#000;font-weight:bold">)</span>
+          <span style="color:#000;font-weight:bold">}</span>
+      <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><h2 id="buffering">Buffering</h2>
+<p>Floodplain is an eventual consistency model: Changes in the source database propagate to the destination source in near-realtime, but there <strong>is</strong> a measurable delay. So you <strong>can</strong> update the source database, and immediately check the destination database and still see the old value.
+Usually we want to minimize this delay to minimize this possible window of inconsistency, but sometimes we don&rsquo;t mind, and we even want to create a conscious delay in updating the destination.</p>
+<p>Imagine this situation: We update a certain record many times in quick succession, simply because that is our workflow, or how our existing code works. Now conceptually we only need to propagate the last version of that record, as we would overwrite that version immediately with the next version.</p>
+<p>Combined with the &lsquo;write amplification&rsquo; factors we talked about before it can really make a difference in performance.
+In this case, we might want to wait a bit to propagate. If, for example, there is no issue when the sink data is out of date for let&rsquo;s say a minute, we can prevent a lot of downstream traffic by just sitting on an update for a minute, and only propagate the last of these updates during that time window. It is even clearer when the downstream sink isn&rsquo;t just a datastore, but also a notification mechanism. If something updated several times in a few seconds, you generally want only one notification.</p>
+<p>TODO: Code example / Not completely integrated atm.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">buffer</span><span style="color:#000;font-weight:bold">(</span><span style="color:#0000cf;font-weight:bold">20000</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><h2 id="differential-operator">Differential operator</h2>
+<p>This is an operator that can reduce the number of propagated messages, and reduce the load on downstream systems. The diff transformer will store the latest value for each key. When a new message arrives, it will compare the message to the stored one. When the messages are identical, the message will be ignored. Otherwise, it updates the store and forwards the new message.</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">stream</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;gen&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@source&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">diff</span><span style="color:#000;font-weight:bold">()</span>
+        <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;@output&#34;</span><span style="color:#000;font-weight:bold">)</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>For example we might listen to a change feed topic, but if we are not interested in certain columns, we can prevent messages that only touch those columns.</p>
+<h2 id="composing-topologies">Composing topologies</h2>
+<p>//There is a constraint in Kafka Streams topologies we have not mentioned yet. That restriction is: We can use a source only <em>once</em> in a topology.
+no longer true, TODO rewite this part.</p>
+<p>Why would you want to do that? Let me show an example.
+In our movie rental database, we have customers. Every customer has an address_id, which points to a record in the &lsquo;address&rsquo; table. If we want to create a record of a customer with their address, a simple join statement works fine.
+However, there is also a table &lsquo;store&rsquo; (like in brick and mortar shops). Stores also have an address_id. There is also a table &lsquo;staff&rsquo;, you guessed it, staff also links to the address table.
+If we were to implement this naively, kafka streams would complain (paraphrasing) that you have already added the address table, and can&rsquo;t use it again.
+One solution would be to simply run three topologies (not implemented at the time of writing TODO).
+This is possible but it could be more efficient.
+In our current dvd rental model, the data model takes denormalization (in my opinion) to an extreme. An address object does not contain an entire address, it contains address attributes, but it also has a &lsquo;city_id&rsquo; which points to a list of known cities. Not only that, the city table has a country_id, that points to a list of known countries.</p>
+<p>We have all the tools we need to flatten this to single address object:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+<span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#4e9a06">&#34;${msg[&#34;</span><span style="color:#000">city_id</span><span style="color:#4e9a06">&#34;]}&#34;</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;city&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">msg</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#4e9a06">&#34;${msg[&#34;</span><span style="color:#000">country_id</span><span style="color:#4e9a06">&#34;]}&#34;</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;country&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span>
+        <span style="color:#000;font-weight:bold">}</span>
+        <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span> <span style="color:#000;font-weight:bold">-&gt;</span>
+            <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#204a87;font-weight:bold">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;country&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span> <span style="color:#000;font-weight:bold">-&gt;</span>
+    <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#204a87;font-weight:bold">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;city&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+<span style="color:#8f5902;font-style:italic">// ... some sink
+</span><span style="color:#8f5902;font-style:italic"></span><span style="color:#000;font-weight:bold">}</span>
 
-</div>
-
-<p>Tutorials are <strong>complete worked examples</strong> made up of <strong>multiple tasks</strong> that guide the user through a relatively simple but realistic scenario: building an application that uses some of your project’s features, for example. If you have already created some Examples for your project you can base Tutorials on them. This section is <strong>optional</strong>. However, remember that although you may not need this section at first, having tutorials can be useful to help your users engage with your example code, especially if there are aspects that need more explanation than you can easily provide in code comments.</p>
-
+</code></pre></div><p>No particular challenge, but now we have an address topic that we want to join to several &lsquo;toplevel&rsquo; topic that we want to represent in our sink: Customer, store, and staff.</p>
+<p>Instead of re-joining these address components every time, we can create an &lsquo;internal&rsquo; sink</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">  <span style="color:#000">sink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">)</span>
+</code></pre></div><p>This sink will write the joined result into an internal Kafka topic. Then we can read from this topic and join it to multiple others:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin">            <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;customer&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                <span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">m</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#4e9a06">&#34;${m[&#34;</span><span style="color:#000">address_id</span><span style="color:#4e9a06">&#34;]}&#34;</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                    <span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span> <span style="color:#000;font-weight:bold">-&gt;</span>
+                    <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#204a87;font-weight:bold">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span><span style="color:#000;font-weight:bold">)</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;customer&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;filtertopic&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+            <span style="color:#000;font-weight:bold">}</span>
+            <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;staff&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                <span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">m</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#4e9a06">&#34;${m[&#34;</span><span style="color:#000">address_id</span><span style="color:#4e9a06">&#34;]}&#34;</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                    <span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span> <span style="color:#000;font-weight:bold">-&gt;</span>
+                    <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#204a87;font-weight:bold">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span><span style="color:#000;font-weight:bold">)</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;staff&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;stafftopic&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+            <span style="color:#000;font-weight:bold">}</span>
+            <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;staff&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">postgresConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                <span style="color:#000">joinRemote</span><span style="color:#000;font-weight:bold">({</span> <span style="color:#000">m</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#4e9a06">&#34;${m[&#34;</span><span style="color:#000">address_id</span><span style="color:#4e9a06">&#34;]}&#34;</span> <span style="color:#000;font-weight:bold">},</span> <span style="color:#204a87;font-weight:bold">false</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+                    <span style="color:#000">source</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{}</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#204a87;font-weight:bold">set</span> <span style="color:#000;font-weight:bold">{</span> <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span> <span style="color:#000;font-weight:bold">-&gt;</span>
+                    <span style="color:#000">msg</span><span style="color:#000;font-weight:bold">.</span><span style="color:#204a87;font-weight:bold">set</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;address&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">state</span><span style="color:#000;font-weight:bold">)</span>
+                <span style="color:#000;font-weight:bold">}</span>
+                <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;store&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;storetopic&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+            <span style="color:#000;font-weight:bold">}</span>
+</code></pre></div><p>Now the address/city/country join only needs to be performed once. Note it still isn&rsquo;t particularly efficient, as it is impossible to see from an address record of it is a customer address, a staff address or a store address, so for large datasets this is still an expensive operation.
+For the tiny dataset we have here it is not a problem at all, but image there are hundreds of millions of address objects, but only a handful of &lsquo;store&rsquo; objects, in order to make this join we need to go through those hundreds of millions of records, very rarely matching anything.
+This pattern of having one big table to serve multiple other tables (Many SQL designers consider that a best practice) is an antipattern for CDC applications.</p>
+<h2 id="source-connectors">Source connectors</h2>
+<p>Kafka Connect sources and sinks should work basically work out of the box, the only thing floodplain needs is a strongly-typed configuration object.</p>
+<p>TODO</p>
+<h2 id="sink-connectors">Sink Connectors</h2>
+<p>TODO</p>
+<h2 id="extending-floodplain-creating-your-own-connectors-and-transformers">Extending floodplain: Creating your own connectors and transformers</h2>
+<p>TODO</p>
+<h2 id="example">Example</h2>
+<p>Let&rsquo;s take an example.</p>
+<p>We have an application, that uses a database. If you want to play along, clone this repository:</p>
+<p><a href="https://github.com/floodplainio/floodplain-cdc.git">https://github.com/floodplainio/floodplain-cdc.git</a></p>
+<p>This is a Kotlin + Quarkus application, as well as a Postgres database.
+There is already a datamodel present, and the application will periodically insert random payments into the payment table.</p>
+<p>It is pretty easy to get started, just follow the README in the repository:
+<a href="https://github.com/floodplainio/floodplain-cdc/blob/master/README.md">https://github.com/floodplainio/floodplain-cdc/blob/master/README.md</a></p>
+<p>So now we have an application running, with actual data, and actual changes being made to the database.</p>
+<p>As stated in the readme, you can connect to this database using this connection string:</p>
+<pre><code>postgresql://localhost:mysecretpassword@localhost:5432/dvdrental
+</code></pre>
         <div class="section-index">
     
     
@@ -507,39 +765,12 @@
             
         
             
-        
-            
-        
-            
-        
-            
                 <div class="entry">
                     <h5>
-                        <a href="/docs/tutorials/multi-bear/">Multi-Bear Domicile Setup</a>
+                        <a href="/docs/tutorials/multi-bear/">Running the standalone demo app</a>
                     </h5>
-                    <p>A short lead descripton about this content page. It can be <strong>bold</strong> or <em>italic</em> and can be split over multiple paragraphs.</p>
+                    <p></p>
                 </div>
-            
-        
-            
-        
-            
-        
-            
-        
-            
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/tutorials/tutorial2/">Another Tutorial</a>
-                    </h5>
-                    <p>A short lead descripton about this content page. It can be <strong>bold</strong> or <em>italic</em> and can be split over multiple paragraphs.</p>
-                </div>
-            
-        
-            
-        
-            
-        
             
         
             
@@ -617,7 +848,7 @@
 		<br />
 	
 	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified April 28, 2020: <a  href="https://github.com/google/docsy-example/commit/ab4277c4b06e4d6e8b05bbbe4360b408a109160a">Merge pull request #55 from dholbach/switch-to-example-github (ab4277c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 11, 2020: <a  href="https://github.com/google/docsy-example/commit/b1ff86f9c34ee051fb3b7110ff87fdf1fc09f9af">some house cleaning (b1ff86f)</a>
 </div>
 </div>
 
