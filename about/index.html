@@ -21,17 +21,17 @@
 <link rel="icon" type="image/png" href="/favicons/android-144x144.png" sizes="144x144">
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
-<title>About Goldydocs | Floodplain</title><meta property="og:title" content="About Goldydocs" />
-<meta property="og:description" content="A Docsy example site" />
+<title>About Floodplain | Floodplain</title><meta property="og:title" content="About Floodplain" />
+<meta property="og:description" content="Floodplain Documentation and Examples" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/about/" />
-<meta property="og:image" content="/about/featured-background.jpg"/>
+<meta property="og:image" content="/about/featured_background.jpg"/>
 <meta property="og:site_name" content="Floodplain" />
-<meta itemprop="name" content="About Goldydocs">
-<meta itemprop="description" content="A Docsy example site"><meta name="twitter:card" content="summary_large_image"/>
-<meta name="twitter:image" content="/about/featured-background.jpg"/>
-<meta name="twitter:title" content="About Goldydocs"/>
-<meta name="twitter:description" content="A Docsy example site"/>
+<meta itemprop="name" content="About Floodplain">
+<meta itemprop="description" content="Floodplain Documentation and Examples"><meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="/about/featured_background.jpg"/>
+<meta name="twitter:title" content="About Floodplain"/>
+<meta name="twitter:description" content="Floodplain Documentation and Examples"/>
 
 
 <script type="application/javascript">
@@ -117,8 +117,6 @@ if (!doNotTrack) {
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
-
 </div>
 </nav>
 
@@ -141,16 +139,15 @@ if (!doNotTrack) {
 
 
 
-
-<link rel="preload" as="image" href="/about/featured-background_hu376e1fbab6ce6c455a2b3aa5c258c0d9_496231_960x540_fill_q75_catmullrom_bottom.jpg" media="(max-width: 1200px)">
-<link rel="preload" as="image" href="/about/featured-background_hu376e1fbab6ce6c455a2b3aa5c258c0d9_496231_1920x1080_fill_q75_catmullrom_bottom.jpg" media="(min-width: 1200px)">
+<link rel="preload" as="image" href="/about/featured_background_hucc9cda46dcbe23933796135a95e78f1d_248838_960x540_fill_q75_catmullrom_bottom.jpg" media="(max-width: 1200px)">
+<link rel="preload" as="image" href="/about/featured_background_hucc9cda46dcbe23933796135a95e78f1d_248838_1920x1080_fill_q75_catmullrom_bottom.jpg" media="(min-width: 1200px)">
 <style>
 #td-cover-block-0 {
-    background-image: url(/about/featured-background_hu376e1fbab6ce6c455a2b3aa5c258c0d9_496231_960x540_fill_q75_catmullrom_bottom.jpg); 
+    background-image: url(/about/featured_background_hucc9cda46dcbe23933796135a95e78f1d_248838_960x540_fill_q75_catmullrom_bottom.jpg); 
 }
 @media only screen and (min-width: 1200px) {
     #td-cover-block-0 {
-        background-image: url(/about/featured-background_hu376e1fbab6ce6c455a2b3aa5c258c0d9_496231_1920x1080_fill_q75_catmullrom_bottom.jpg); 
+        background-image: url(/about/featured_background_hucc9cda46dcbe23933796135a95e78f1d_248838_1920x1080_fill_q75_catmullrom_bottom.jpg); 
     }
 }
 </style>
@@ -160,10 +157,12 @@ if (!doNotTrack) {
     <div class="row">
       <div class="col-12">
         <div class="text-center">
-          <h1 class="display-1 mt-0 mt-md-5 pb-4">About Goldydocs</h1>
+          <h1 class="display-1 mt-0 mt-md-5 pb-4">About Floodplain</h1>
           
           <div class="pt-3 lead">
-            <p class="lead mt-5">A sample site using the Docsy Hugo theme.
+            <p class="lead mt-5">
+  Floodplain was based upon an internal data replication system at Dexels that
+  was open sourced.
           </div>
         </div>
       </div>
@@ -171,9 +170,7 @@ if (!doNotTrack) {
   </div>
   
 </section>
-
-
-
+ 
 
 
 
@@ -181,33 +178,29 @@ if (!doNotTrack) {
 <section class="row td-box td-box--1 position-relative td-box--gradient td-box--height-auto">
 	<div class="container text-center td-arrow-down">
 		<span class="h4 mb-0">
-			Goldydocs is a sample site using the <a href="https://github.com/google/docsy">Docsy</a> Hugo theme that shows what it can do and provides you with a template site structure. It’s designed for you to clone and edit as much as you like. See the different sections of the documentation and site for more ideas.
+			Floodplain started out being defined
+using a pretty horrible XML language. It performed and (as far as I know) is
+performing just fine, but making changes is tricky. As a sabbatical hobby
+project, I started hunting for a language that could model it well.
 		</span>
 	</div>
 </section>
-
-
-
-
-
-
  
-<a id="td-block-2" class="td-offset-anchor"></a>
-<section class="row td-box td-box--2 td-box--gradient td-box--height-auto">
-	<div class="col">
-		<div class="row ">
-			<div class="col-12">
-<h1 class="text-center">This is another section</h1>
-</div>
 
-		</div>
+
+
+<a id="td-block-2" class="td-offset-anchor"></a>
+<section class="row td-box td-box--2 position-relative td-box--gradient td-box--height-auto">
+	<div class="container text-center td-arrow-down">
+		<span class="h4 mb-0">
+			<p class="lead col-12">
+  I ended up with Kotlin. Kotlin's extension functions allow me to model a tight
+  API while still being extendable. Also, a static typing system allows for
+  better tooling.
+		</span>
 	</div>
 </section>
-
-
-
-
-
+ 
 
 
  
@@ -216,7 +209,7 @@ if (!doNotTrack) {
 	<div class="col">
 		<div class="row ">
 			<div class="col-12">
-<h1 class="text-center">This is another section</h1>
+  <h1 class="text-center">Feedback is welcome!</h1>
 </div>
 
 		</div>
@@ -244,14 +237,8 @@ if (!doNotTrack) {
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Twitter" aria-label="Twitter">
-    <a class="text-white" target="_blank" href="https://example.org/twitter">
+    <a class="text-white" target="_blank" href="https://twitter.com/floodplainio">
       <i class="fab fa-twitter"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Stack Overflow" aria-label="Stack Overflow">
-    <a class="text-white" target="_blank" href="https://example.org/stack">
-      <i class="fab fa-stack-overflow"></i>
     </a>
   </li>
   
@@ -267,7 +254,7 @@ if (!doNotTrack) {
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/google/docsy">
+    <a class="text-white" target="_blank" href="https://github.com/floodplainio/floodplain">
       <i class="fab fa-github"></i>
     </a>
   </li>
@@ -290,10 +277,10 @@ if (!doNotTrack) {
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 The Docsy Authors All Rights Reserved</small>
+        <small class="text-white">&copy; 2020 Frank Lyaruu All Rights Reserved</small>
         <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a></small>
 	
-		<p class="mt-2"><a href="/about/">About Goldydocs</a></p>
+		<p class="mt-2"><a href="/about/">About Floodplain</a></p>
 	
       </div>
     </div>

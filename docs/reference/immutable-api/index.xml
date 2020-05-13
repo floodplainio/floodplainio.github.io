@@ -1,0 +1,56 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Floodplain – </title>
+    <link>/docs/reference/immutable-api/</link>
+    <description>Recent content on Floodplain</description>
+    <generator>Hugo -- gohugo.io</generator>
+    
+	  <atom:link href="/docs/reference/immutable-api/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Docs: </title>
+      <link>/docs/reference/immutable-api/alltypes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/reference/immutable-api/alltypes/</guid>
+      <description>
+        
+        
+        &lt;h3 id=&#34;all-types&#34;&gt;All Types&lt;/h3&gt;
+&lt;p&gt;|&lt;/p&gt;
+&lt;h5 id=&#34;iofloodplainimmutableapiimmutablemessageiofloodplainimmutableapi-immutable-messageindexmd&#34;&gt;&lt;a href=&#34;../io.floodplain.immutable.api/-immutable-message/index.md&#34;&gt;io.floodplain.immutable.api.ImmutableMessage&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;|&lt;/p&gt;
+&lt;h5 id=&#34;iofloodplainimmutableapiimmutablemessageparseriofloodplainimmutableapi-immutable-message-parserindexmd&#34;&gt;&lt;a href=&#34;../io.floodplain.immutable.api/-immutable-message-parser/index.md&#34;&gt;io.floodplain.immutable.api.ImmutableMessageParser&lt;/a&gt;&lt;/h5&gt;
+&lt;p&gt;|&lt;/p&gt;
+&lt;h5 id=&#34;iofloodplainimmutableapiimmutabletypeparseriofloodplainimmutableapi-immutable-type-parserindexmd&#34;&gt;&lt;a href=&#34;../io.floodplain.immutable.api/-immutable-type-parser/index.md&#34;&gt;io.floodplain.immutable.api.ImmutableTypeParser&lt;/a&gt;&lt;/h5&gt;
+
+      </description>
+    </item>
+    
+    <item>
+      <title>Docs: </title>
+      <link>/docs/reference/immutable-api/io.floodplain.immutable.api/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/docs/reference/immutable-api/io.floodplain.immutable.api/</guid>
+      <description>
+        
+        
+        &lt;p&gt;&lt;a href=&#34;../index.md&#34;&gt;immutable-api&lt;/a&gt; / &lt;a href=&#34;./index.md&#34;&gt;io.floodplain.immutable.api&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;package-iofloodplainimmutableapi&#34;&gt;Package io.floodplain.immutable.api&lt;/h2&gt;
+&lt;h3 id=&#34;types&#34;&gt;Types&lt;/h3&gt;
+&lt;p&gt;| &lt;a href=&#34;-immutable-message/index.md&#34;&gt;ImmutableMessage&lt;/a&gt; | &lt;code&gt;interface ImmutableMessage&lt;/code&gt; |
+| &lt;a href=&#34;-immutable-message-parser/index.md&#34;&gt;ImmutableMessageParser&lt;/a&gt; | &lt;code&gt;interface ImmutableMessageParser&lt;/code&gt; |
+| &lt;a href=&#34;-immutable-type-parser/index.md&#34;&gt;ImmutableTypeParser&lt;/a&gt; | &lt;code&gt;open class ImmutableTypeParser&lt;/code&gt; |&lt;/p&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>

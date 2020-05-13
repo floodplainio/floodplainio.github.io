@@ -22,17 +22,14 @@
 <link rel="icon" type="image/png" href="/favicons/android-192x192.png" sizes="192x192">
 
 <title>Getting Started | Floodplain</title><meta property="og:title" content="Getting Started" />
-<meta property="og:description" content="What does your user need to know to try your project?
-" />
+<meta property="og:description" content="Floodplain Documentation and Examples" />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="/docs/getting-started/" />
 <meta property="og:site_name" content="Floodplain" />
 <meta itemprop="name" content="Getting Started">
-<meta itemprop="description" content="What does your user need to know to try your project?
-"><meta name="twitter:card" content="summary"/>
+<meta itemprop="description" content="Floodplain Documentation and Examples"><meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Getting Started"/>
-<meta name="twitter:description" content="What does your user need to know to try your project?
-"/>
+<meta name="twitter:description" content="Floodplain Documentation and Examples"/>
 
 
 <script type="application/javascript">
@@ -118,8 +115,6 @@ if (!doNotTrack) {
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
-
 </div>
 </nav>
 
@@ -137,8 +132,6 @@ if (!doNotTrack) {
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
-
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
@@ -200,12 +193,6 @@ if (!doNotTrack) {
   <ul>
     <li class="collapse show" id="docsgetting-started">
       
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsgetting-startedexample-page" href="/docs/getting-started/example-page/">Example Page</a>
       
       
     </li>
@@ -306,6 +293,47 @@ if (!doNotTrack) {
       
       
       
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsreferencefloodplain-dsl" href="/docs/reference/floodplain-dsl/"></a>
+      
+      
+      
+      
+
+
+
+
+
+
+<ul class="td-sidebar-nav__section pr-md-3">
+  <li class="td-sidebar-nav__section-title">
+    <a  href="/docs/reference/immutable-api/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section"></a>
+  </li>
+  <ul>
+    <li class="collapse " id="docsreferenceimmutable-api">
+      
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsreferenceimmutable-apialltypes" href="/docs/reference/immutable-api/alltypes/"></a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-docsreferenceimmutable-apiiofloodplainimmutableapi" href="/docs/reference/immutable-api/io.floodplain.immutable.api/"></a>
+      
+      
+    </li>
+  </ul>
+</ul>
+
+      
+      
     </li>
   </ul>
 </ul>
@@ -353,9 +381,7 @@ if (!doNotTrack) {
 <nav id="TableOfContents">
   <ul>
     <li><a href="#prerequisites">Prerequisites</a></li>
-    <li><a href="#installation">Installation</a></li>
-    <li><a href="#setup">Setup</a></li>
-    <li><a href="#try-it-out">Try it out!</a></li>
+    <li><a href="#building-and-running-a-floodplain-application">Building and Running a Floodplain application</a></li>
   </ul>
 </nav>
 
@@ -393,33 +419,110 @@ if (!doNotTrack) {
             
 <div class="td-content">
 	<h1>Getting Started</h1>
-        <div class="lead">What does your user need to know to try your project?</div>
+        
 	
-	
-
-<div class="pageinfo pageinfo-primary">
-<p>This is a placeholder page that shows you how to use this template site.</p>
-
-</div>
-
-<p>Information in this section helps your user try your project themselves.</p>
+	<h2 id="prerequisites">Prerequisites</h2>
 <ul>
-<li>
-<p>What do your users need to do to start using your project? This could include downloading/installation instructions, including any prerequisites or system requirements.</p>
-</li>
-<li>
-<p>Introductory “Hello World” example, if appropriate. More complex tutorials should live in the Tutorials section.</p>
-</li>
+<li>Java 11 or later</li>
+<li>Gradle or Maven</li>
+<li>Kotlin 1.3</li>
 </ul>
-<p>Consider using the headings below for your getting started page. You can delete any that are not applicable to your project.</p>
-<h2 id="prerequisites">Prerequisites</h2>
-<p>Are there any system requirements for using your project? What languages are supported (if any)? Do users need to already have any software or tools installed?</p>
-<h2 id="installation">Installation</h2>
-<p>Where can your user find your project code? How can they install it (binaries, installable package, build from source)? Are there multiple options/versions they can install and how should they choose the right one for them?</p>
-<h2 id="setup">Setup</h2>
-<p>Is there any initial setup users need to do after installation to try your project?</p>
-<h2 id="try-it-out">Try it out!</h2>
-<p>Can your users test their installation, for example by running a commmand or deploying a Hello World example?</p>
+<h2 id="building-and-running-a-floodplain-application">Building and Running a Floodplain application</h2>
+<p>Building Floodplain application is pretty easy. I&rsquo;m going to use gradle here, but Maven should also work.</p>
+<p>Let&rsquo;s create a new empty Gradle / Kotlin application:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">frank@MacBook-Frank-2:~/git$ mkdir floodplain-demo
+frank@MacBook-Frank-2:~/git$ <span style="color:#204a87">cd</span> floodplain-demo
+frank@MacBook-Frank-2:~/git/floodplain-demo$ gradle init
+
+Select <span style="color:#204a87">type</span> of project to generate:
+  1: basic
+  2: application
+  3: library
+  4: Gradle plugin
+Enter selection <span style="color:#ce5c00;font-weight:bold">(</span>default: basic<span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">[</span>1..4<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#0000cf;font-weight:bold">2</span>
+
+Select implementation language:
+  1: C++
+  2: Groovy
+  3: Java
+  4: Kotlin
+  5: Swift
+Enter selection <span style="color:#ce5c00;font-weight:bold">(</span>default: Java<span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">[</span>1..5<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#0000cf;font-weight:bold">4</span>
+
+Select build script DSL:
+  1: Groovy
+  2: Kotlin
+Enter selection <span style="color:#ce5c00;font-weight:bold">(</span>default: Kotlin<span style="color:#ce5c00;font-weight:bold">)</span> <span style="color:#ce5c00;font-weight:bold">[</span>1..2<span style="color:#ce5c00;font-weight:bold">]</span> <span style="color:#0000cf;font-weight:bold">1</span>
+
+Project name <span style="color:#ce5c00;font-weight:bold">(</span>default: floodplain-demo<span style="color:#ce5c00;font-weight:bold">)</span>:
+Source package <span style="color:#ce5c00;font-weight:bold">(</span>default: floodplain.demo<span style="color:#ce5c00;font-weight:bold">)</span>: io.floodplain.demo
+
+BUILD SUCCESSFUL in 28s
+<span style="color:#0000cf;font-weight:bold">2</span> actionable tasks: <span style="color:#0000cf;font-weight:bold">2</span> executed
+frank@MacBook-Frank-2:~/git/floodplain-demo$
+</code></pre></div><p>Now, let&rsquo;s test if the build compiles:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">frank@MacBook-Frank-2:~/git/floodplain-demo$ ls
+build.gradle	gradle		gradlew		gradlew.bat	settings.gradle	src
+frank@MacBook-Frank-2:~/git/floodplain-demo$ gradle build
+
+BUILD SUCCESSFUL in 9s
+<span style="color:#0000cf;font-weight:bold">8</span> actionable tasks: <span style="color:#0000cf;font-weight:bold">8</span> executed
+</code></pre></div><p>Now, add the floodplain dependency:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-groovy" data-lang="groovy"><span style="color:#000">implementation</span> <span style="color:#4e9a06">&#39;io.floodplain:floodplain-dsl:0.8.28&#39;</span>
+</code></pre></div><p>(Check the version, there might be a newer one:
+<a href="https://maven-badges.herokuapp.com/maven-central/io.floodplain/floodplain-dsl"><img src="https://maven-badges.herokuapp.com/maven-central/io.floodplain/floodplain-dsl/badge.svg" alt="Maven Central"></a>)</p>
+<p>Now we can replace the sample main function by something like this:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-kotlin" data-lang="kotlin"><span style="color:#204a87;font-weight:bold">package</span> <span style="color:#000">io.floodplain.demo</span>
+
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">io.floodplain.kotlindsl.*</span>
+<span style="color:#204a87;font-weight:bold">import</span> <span style="color:#000">java.net.URL</span>
+
+<span style="color:#204a87;font-weight:bold">fun</span> <span style="color:#000">main</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">args</span><span style="color:#000;font-weight:bold">:</span> <span style="color:#000">Array</span><span style="color:#000;font-weight:bold">&lt;</span><span style="color:#000">String</span><span style="color:#000;font-weight:bold">&gt;)</span> <span style="color:#000;font-weight:bold">{</span>
+    <span style="color:#000">stream</span> <span style="color:#000;font-weight:bold">{</span>
+        <span style="color:#8f5902;font-style:italic">// create a config, named &#39;mypostgres&#39;, pointing to host &#34;postgres&#34; at port 5432, with username &#34;postgres&#34;, password: &#34;mysecretpassword&#34; and use database &#34;dvdrental&#34;
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">pgConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">postgresSourceConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mypostgres&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#0000cf;font-weight:bold">5432</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;postgres&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;mysecretpassword&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;dvdrental&#34;</span><span style="color:#000;font-weight:bold">)</span>
+
+        <span style="color:#8f5902;font-style:italic">// create a mongodb config, named &#39;mymongo&#39; pointing to uri: &#39;mongodb://mongo&#39; using database: &#34;mydatabase&#34;
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#204a87;font-weight:bold">val</span> <span style="color:#000">mongoConfig</span> <span style="color:#000;font-weight:bold">=</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;mymongo&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;mongodb://mongo&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;mydatabase&#34;</span><span style="color:#000;font-weight:bold">)</span>
+
+        <span style="color:#8f5902;font-style:italic">// create a source, using schema &#34;public&#34; and table &#34;film&#34; and use the postgres
+</span><span style="color:#8f5902;font-style:italic"></span>        <span style="color:#000">postgresSource</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;public&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;film&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">pgConfig</span><span style="color:#000;font-weight:bold">)</span> <span style="color:#000;font-weight:bold">{</span>
+            <span style="color:#8f5902;font-style:italic">// For each key, message, and secondary message, log the key
+</span><span style="color:#8f5902;font-style:italic"></span>            <span style="color:#000">each</span> <span style="color:#000;font-weight:bold">{</span>
+                    <span style="color:#000">key</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">_</span> <span style="color:#000;font-weight:bold">-&gt;</span> <span style="color:#000">println</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;Key: $key&#34;</span><span style="color:#000;font-weight:bold">)</span>
+            <span style="color:#000;font-weight:bold">}</span>
+            <span style="color:#8f5902;font-style:italic">// ... add more transformers
+</span><span style="color:#8f5902;font-style:italic"></span>            <span style="color:#000">mongoSink</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;justfilm&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#4e9a06">&#34;justfilm&#34;</span><span style="color:#000;font-weight:bold">,</span> <span style="color:#000">mongoConfig</span><span style="color:#000;font-weight:bold">)</span>
+        <span style="color:#000;font-weight:bold">}</span>
+    <span style="color:#000;font-weight:bold">}.</span><span style="color:#000">renderAndStart</span><span style="color:#000;font-weight:bold">(</span><span style="color:#000">URL</span><span style="color:#000;font-weight:bold">(</span><span style="color:#4e9a06">&#34;http://localhost:8083/connectors&#34;</span><span style="color:#000;font-weight:bold">),</span> <span style="color:#4e9a06">&#34;localhost:9092&#34;</span><span style="color:#000;font-weight:bold">)</span>
+<span style="color:#000;font-weight:bold">}</span>
+
+</code></pre></div><p>(You&rsquo;ll need to add some imports)
+And let&rsquo;s check if the compilation worked:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">frank@MacBook-Frank-2:~/git/floodplain-demo$ gradle build
+
+BUILD SUCCESSFUL in 8s
+<span style="color:#0000cf;font-weight:bold">8</span> actionable tasks: <span style="color:#0000cf;font-weight:bold">6</span> executed, <span style="color:#0000cf;font-weight:bold">2</span> up-to-date
+</code></pre></div><p>So this was all pretty easy to set up and compile, but running it is a bit more involved, as we need a lot of things:</p>
+<ul>
+<li>A source database, for now only postgres is supported, but any databases supported by <a href="http://debezium.io">Debezium</a> should be easy to implement. The postgresSourceConfig should point to that database.</li>
+<li>A Kafka cluster. The last parameter of the renderAndStart method points to this</li>
+<li>A Zookeeper cluster (needed by Kafka) In the future Kafka should be able to run without Zookeeper, but for now we need it</li>
+<li>A destination database. For now I only support MongoDB, but any Kafka Connect sink should be easy to implement.</li>
+<li>A Kafka Connect instance, used in the renderAndStart method. This should contain all connector logic for sources and sinks. For each source or sink configuration, the Floodplain instance will POST a json object to that URL, to indicate how data should flow from or to Kafka.</li>
+</ul>
+<p>This is a lot of work to just show how it works, for that we have <a href="https://github.com/floodplainio/floodplain-demo-setup">a demo setup</a> that starts all that in one single docker-compose file, along with some example data about a fictional DVD rental company. Along with the database, it also contains a simple Kotlin application that inserts a random payment record every few seconds, to simulate realistically changing data</p>
+<p>To make this work, clone <a href="https://github.com/floodplainio/floodplain-demo-setup">the demo setup</a>:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">git clone https://github.com/floodplainio/floodplain-demo-setup.git
+</code></pre></div><p>Enter the folder:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#204a87">cd</span> floodplain-demo-setup
+</code></pre></div><p>And start the cluster:
+(Added the docker-compose rm, so after stopping the cluster all containers will be deleted. For demos it is easier to start with a clean slate every time)</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">docker-compose up <span style="color:#ce5c00;font-weight:bold">&amp;&amp;</span> docker-compose rm -f
+</code></pre></div><p>When this is running, we should be able to run our definition:</p>
+<div class="highlight"><pre style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">gradle run
+</code></pre></div><p>Now we should see our application start, you should see 1000 println&rsquo;s of the keys in the Postgres table, and when you check the MongoDB database, you should find an up-to-date collection with the same contents as the &lsquo;film&rsquo; table in Postgres.</p>
+<p>Whenever you change Postgres, MongoDB should change too, as long as Floodplain keeps running.</p>
 
         <div class="section-index">
     
@@ -445,80 +548,19 @@ if (!doNotTrack) {
             
         
             
-                <div class="entry">
-                    <h5>
-                        <a href="/docs/getting-started/example-page/">Example Page</a>
-                    </h5>
-                    <p>A short lead descripton about this content page. It can be <strong>bold</strong> or <em>italic</em> and can be split over multiple paragraphs.</p>
-                </div>
+        
+            
+        
+            
+        
             
         
     
 </div>
 
 	
-		<style>
-  .feedback--answer {
-    display: inline-block;
-  }
-  .feedback--answer-no {
-    margin-left: 1em;
-  }
-  .feedback--response {
-    display: none;
-    margin-top: 1em;
-  }
-  .feedback--response__visible {
-    display: block;
-  }
-</style>
-<h2 class="feedback--title">Feedback</h2>
-<p class="feedback--question">Was this page helpful?</p>
-<button class="feedback--answer feedback--answer-yes">Yes</button>
-<button class="feedback--answer feedback--answer-no">No</button>
-<p class="feedback--response feedback--response-yes">
-  Glad to hear it! Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
-</p>
-<p class="feedback--response feedback--response-no">
-  Sorry to hear that. Please <a href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we can improve</a>.
-</p>
-<script>
-  const yesButton = document.querySelector('.feedback--answer-yes');
-  const noButton = document.querySelector('.feedback--answer-no');
-  const yesResponse = document.querySelector('.feedback--response-yes');
-  const noResponse = document.querySelector('.feedback--response-no');
-  const disableButtons = () => {
-    yesButton.disabled = true;
-    noButton.disabled = true;
-  };
-  const sendFeedback = (value) => {
-    if (typeof ga !== 'function') return;
-    const args = {
-      command: 'send',
-      hitType: 'event',
-      category: 'Helpful',
-      action: 'click',
-      label: window.location.pathname,
-      value: value
-    };
-    ga(args.command, args.hitType, args.category, args.action, args.label, args.value);
-  };
-  yesButton.addEventListener('click', () => {
-    yesResponse.classList.add('feedback--response__visible');
-    disableButtons();
-    sendFeedback(1);
-  });
-  noButton.addEventListener('click', () => {
-    noResponse.classList.add('feedback--response__visible');
-    disableButtons();
-    sendFeedback(0);
-  });
-</script>
-
-		<br />
 	
-	
-	<div class="text-muted mt-5 pt-3 border-top">Last modified April 28, 2020: <a  href="https://github.com/google/docsy-example/commit/ab4277c4b06e4d6e8b05bbbe4360b408a109160a">Merge pull request #55 from dholbach/switch-to-example-github (ab4277c)</a>
+	<div class="text-muted mt-5 pt-3 border-top">Last modified May 13, 2020: <a  href="https://github.com/google/docsy-example/commit/7b54cd6eb087383233589f85d0af3afa8a5b4955">moving stuff around (7b54cd6)</a>
 </div>
 </div>
 
@@ -542,14 +584,8 @@ if (!doNotTrack) {
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Twitter" aria-label="Twitter">
-    <a class="text-white" target="_blank" href="https://example.org/twitter">
+    <a class="text-white" target="_blank" href="https://twitter.com/floodplainio">
       <i class="fab fa-twitter"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Stack Overflow" aria-label="Stack Overflow">
-    <a class="text-white" target="_blank" href="https://example.org/stack">
-      <i class="fab fa-stack-overflow"></i>
     </a>
   </li>
   
@@ -565,7 +601,7 @@ if (!doNotTrack) {
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/google/docsy">
+    <a class="text-white" target="_blank" href="https://github.com/floodplainio/floodplain">
       <i class="fab fa-github"></i>
     </a>
   </li>
@@ -588,10 +624,10 @@ if (!doNotTrack) {
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 The Docsy Authors All Rights Reserved</small>
+        <small class="text-white">&copy; 2020 Frank Lyaruu All Rights Reserved</small>
         <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a></small>
 	
-		<p class="mt-2"><a href="/about/">About Goldydocs</a></p>
+		<p class="mt-2"><a href="/about/">About Floodplain</a></p>
 	
       </div>
     </div>

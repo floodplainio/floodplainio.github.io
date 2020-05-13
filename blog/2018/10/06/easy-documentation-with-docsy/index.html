@@ -125,8 +125,6 @@ if (!doNotTrack) {
 		</ul>
 	</div>
 	<div class="navbar-nav d-none d-lg-block">
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
-
 </div>
 </nav>
 
@@ -144,8 +142,6 @@ if (!doNotTrack) {
   
   <form class="td-sidebar__search d-flex align-items-center">
     
-<input type="search" class="form-control td-search-input" placeholder="&#xf002 Search this site…" aria-label="Search this site…" autocomplete="off">
-
 
     <button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type="button" data-toggle="collapse" data-target="#td-section-nav" aria-controls="td-docs-nav" aria-expanded="false" aria-label="Toggle section navigation">
     </button>
@@ -179,17 +175,23 @@ if (!doNotTrack) {
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/blog/videos/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Videos</a>
+    <a  href="/blog/news/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">News</a>
   </li>
   <ul>
-    <li class="collapse " id="blogvideos">
+    <li class="collapse show" id="blognews">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-blog20180104another-great-release" href="/blog/2018/01/04/another-great-release/">Release New Features</a>
+      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-blog20181006easy-documentation-with-docsy" href="/blog/2018/10/06/easy-documentation-with-docsy/">Announcing Docsy</a>
+      
+      
+      
+      
+      
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-blog20181006the-second-blog-post" href="/blog/2018/10/06/the-second-blog-post/">Second blog post</a>
       
       
     </li>
@@ -208,23 +210,17 @@ if (!doNotTrack) {
 
 <ul class="td-sidebar-nav__section pr-md-3">
   <li class="td-sidebar-nav__section-title">
-    <a  href="/blog/news/" class="align-left pl-0 pr-2 active td-sidebar-link td-sidebar-link__section">News</a>
+    <a  href="/blog/videos/" class="align-left pl-0 pr-2 collapsed td-sidebar-link td-sidebar-link__section">Videos</a>
   </li>
   <ul>
-    <li class="collapse show" id="blognews">
+    <li class="collapse " id="blogvideos">
       
       
       
       
       
       
-      <a class="td-sidebar-link td-sidebar-link__page  active" id="m-blog20181006easy-documentation-with-docsy" href="/blog/2018/10/06/easy-documentation-with-docsy/">Announcing Docsy</a>
-      
-      
-      
-      
-      
-      <a class="td-sidebar-link td-sidebar-link__page " id="m-blog20181006the-second-blog-post" href="/blog/2018/10/06/the-second-blog-post/">Second blog post</a>
+      <a class="td-sidebar-link td-sidebar-link__page " id="m-blog20180104another-great-release" href="/blog/2018/01/04/another-great-release/">Release New Features</a>
       
       
     </li>
@@ -366,14 +362,8 @@ Fetch and scale an image in the upcoming Hugo 0.43.
   </li>
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Twitter" aria-label="Twitter">
-    <a class="text-white" target="_blank" href="https://example.org/twitter">
+    <a class="text-white" target="_blank" href="https://twitter.com/floodplainio">
       <i class="fab fa-twitter"></i>
-    </a>
-  </li>
-  
-  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="Stack Overflow" aria-label="Stack Overflow">
-    <a class="text-white" target="_blank" href="https://example.org/stack">
-      <i class="fab fa-stack-overflow"></i>
     </a>
   </li>
   
@@ -389,7 +379,7 @@ Fetch and scale an image in the upcoming Hugo 0.43.
 <ul class="list-inline mb-0">
   
   <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="GitHub" aria-label="GitHub">
-    <a class="text-white" target="_blank" href="https://github.com/google/docsy">
+    <a class="text-white" target="_blank" href="https://github.com/floodplainio/floodplain">
       <i class="fab fa-github"></i>
     </a>
   </li>
@@ -412,10 +402,10 @@ Fetch and scale an image in the upcoming Hugo 0.43.
         
       </div>
       <div class="col-12 col-sm-4 text-center py-2 order-sm-2">
-        <small class="text-white">&copy; 2020 The Docsy Authors All Rights Reserved</small>
+        <small class="text-white">&copy; 2020 Frank Lyaruu All Rights Reserved</small>
         <small class="ml-1"><a href="https://policies.google.com/privacy" target="_blank">Privacy Policy</a></small>
 	
-		<p class="mt-2"><a href="/about/">About Goldydocs</a></p>
+		<p class="mt-2"><a href="/about/">About Floodplain</a></p>
 	
       </div>
     </div>

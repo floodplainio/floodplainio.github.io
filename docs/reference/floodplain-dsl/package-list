@@ -1,0 +1,6 @@
+$dokka.format:gfm
+$dokka.linkExtension:md
+
+io.floodplain.kotlindsl
+io.floodplain.kotlindsl.message
+io.floodplain.kotlindsl.transformer
