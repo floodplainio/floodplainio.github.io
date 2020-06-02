@@ -8,6 +8,14 @@
   </url>
   
   <url>
+    <loc>/docs/extending-floodplain/</loc>
+  </url>
+  
+  <url>
+    <loc>/docs/features/</loc>
+  </url>
+  
+  <url>
     <loc>/docs/getting-started/</loc>
     <lastmod>2020-05-13T13:43:08+02:00</lastmod>
   </url>
@@ -15,11 +23,6 @@
   <url>
     <loc>/docs/examples/</loc>
     <lastmod>2020-05-13T13:43:08+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/docs/tutorials/multi-bear/</loc>
-    <lastmod>2020-05-11T21:29:23+02:00</lastmod>
   </url>
   
   <url>

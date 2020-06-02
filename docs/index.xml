@@ -14,30 +14,6 @@
     
     
     <item>
-      <title>Docs: Running the standalone demo app</title>
-      <link>/docs/tutorials/multi-bear/</link>
-      <pubDate>Fri, 01 May 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/docs/tutorials/multi-bear/</guid>
-      <description>
-        
-        
-        &lt;h2 id=&#34;example&#34;&gt;Example&lt;/h2&gt;
-&lt;p&gt;Let&amp;rsquo;s take an example.&lt;/p&gt;
-&lt;p&gt;We have an application, that uses a database. If you want to play along, clone this repository:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;https://github.com/floodplainio/floodplain-cdc.git&#34;&gt;https://github.com/floodplainio/floodplain-cdc.git&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;This is a Kotlin + Quarkus application, as well as a Postgres database.
-There is already a datamodel present, and the application will periodically insert random payments into the payment table.&lt;/p&gt;
-&lt;p&gt;It is pretty easy to get started, just follow the README in the repository:
-&lt;a href=&#34;https://github.com/floodplainio/floodplain-cdc/blob/master/README.md&#34;&gt;https://github.com/floodplainio/floodplain-cdc/blob/master/README.md&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;So now we have an application running, with actual data, and actual changes being made to the database.&lt;/p&gt;
-&lt;p&gt;As stated in the readme, you can connect to this database using this connection string:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;postgresql://localhost:mysecretpassword@localhost:5432/dvdrental
-&lt;/code&gt;&lt;/pre&gt;
-      </description>
-    </item>
-    
-    <item>
       <title>Docs: </title>
       <link>/docs/reference/floodplain-dsl/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
